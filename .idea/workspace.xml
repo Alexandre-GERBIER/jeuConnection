@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="a8e21612-38bf-440b-9e29-52421941a14d" name="Default Changelist" comment="Add Joueur class">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+=======
+    <list default="true" id="a8e21612-38bf-440b-9e29-52421941a14d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/view/VueChoixMode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Grille.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Grille.java" afterDir="false" />
+>>>>>>> 813ea21fcec1b9c853f82483e29837c5f46e355b
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,6 +56,20 @@
         </RuleState>
       </list>
     </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Application" />
+      <module name="projet" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Application" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -98,6 +120,7 @@
       <option name="project" value="LOCAL" />
       <updated>1572947152584</updated>
     </task>
+<<<<<<< HEAD
     <task id="LOCAL-00006" summary="test">
       <created>1572958160689</created>
       <option name="number" value="00006" />
@@ -113,6 +136,16 @@
       <updated>1572964740545</updated>
     </task>
     <option name="localTasksCounter" value="8" />
+=======
+    <task id="LOCAL-00006" summary="Add Grille class">
+      <created>1572947466027</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1572947466027</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
+>>>>>>> 813ea21fcec1b9c853f82483e29837c5f46e355b
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -137,8 +170,13 @@
     <MESSAGE value="Create packages, Case constructor/getters/setters" />
     <MESSAGE value="Add main class" />
     <MESSAGE value="Add Joueur class" />
+<<<<<<< HEAD
     <MESSAGE value="test" />
     <MESSAGE value="test 2" />
     <option name="LAST_COMMIT_MESSAGE" value="test 2" />
+=======
+    <MESSAGE value="Add Grille class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add Grille class" />
+>>>>>>> 813ea21fcec1b9c853f82483e29837c5f46e355b
   </component>
 </project>
