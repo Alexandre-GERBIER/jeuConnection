@@ -2,7 +2,7 @@ package model;
 
 public class Grille {
 
-    //ceci est un test
+    //ceci est un test bis
 
     private int n, k;
     private int[][] grille;
