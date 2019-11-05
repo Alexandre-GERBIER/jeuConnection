@@ -2,6 +2,8 @@ package model;
 
 public class Grille {
 
+    //ceci est un test bis
+
     private int n, k;
     private Case[][] grille;
 
