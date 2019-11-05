@@ -1,40 +1,40 @@
 package model;
 
+import static java.awt.Color.white;
+
 public class Grille {
 
-    //ceci est un test bis
-
-    private int n, k;
+    private int taille, valMax;
     private Case[][] grille;
 
-    public Grille(int n_, int k_) {
-        this.n = n_;
-        this.k = k_;
+    public Grille(int n, int k) {
+        this.taille = n;
+        this.valMax = k;
         this.grille = new Case[n][n];
+        remplissage(grille);
     }
 
     public int getN() {
-        return n;
+        return taille;
     }
 
-    public void setN(int n) {
-        this.n = n;
-    }
-
-    public int getK() {
-        return k;
-    }
-
-    public void setK(int k) {
-        this.k = k;
+    public int getvalMax() {
+        return valMax;
     }
 
     public Case[][] getGrille() {
         return grille;
     }
 
-    public void setGrille(Case[][] grille) {
-        this.grille = grille;
+    private int caseValue(){
+        return (int) (Math.random()*(this.valMax-1)+1);
     }
 
+    private void remplissage(Case[][] grille){
+        for(int i=0; i<taille; i++){
+            for(int j=0; j<taille; j++){
+                grille[i][j] = new Case(i,j,caseValue(),white);
+            }
+        }
+    }
 }
