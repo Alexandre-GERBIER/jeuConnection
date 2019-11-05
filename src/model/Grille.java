@@ -1,5 +1,7 @@
 package model;
 
+import java.awt.*;
+
 import static java.awt.Color.white;
 
 public class Grille {
@@ -11,10 +13,10 @@ public class Grille {
         this.taille = n;
         this.valMax = k;
         this.grille = new Case[n][n];
-        remplissage(grille);
+        remplirGrilleAléatoire(grille);
     }
 
-    public int getN() {
+    public int taille() {
         return taille;
     }
 
@@ -30,11 +32,16 @@ public class Grille {
         return (int) (Math.random()*(this.valMax-1)+1);
     }
 
-    private void remplissage(Case[][] grille){
+    private void remplirGrilleAléatoire(Case[][] grille){
         for(int i=0; i<taille; i++){
             for(int j=0; j<taille; j++){
                 grille[i][j] = new Case(i,j,caseValue(),white);
             }
         }
     }
+
+    public Case get(int x, int y){
+        return grille[x][y];
+    }
+
 }

@@ -6,12 +6,14 @@ public class Case {
 
     private int x, y, value;
     private Color color;
+    private Case parent;
 
     public Case(int x_, int y_, int value_, Color color_) {
         this.x = x_;
         this.y = y_;
         this.value = value_;
         this.color = color_;
+        this.parent = null;
     }
 
     public int getX() {
@@ -44,6 +46,14 @@ public class Case {
 
     public void setColor(Color color_) {
         this.color = color_;
+    }
+
+    public void setParent(Case newParent){
+        this.parent = newParent;
+    }
+
+    public Case getParent(){
+        return this.parent;
     }
 
 }
