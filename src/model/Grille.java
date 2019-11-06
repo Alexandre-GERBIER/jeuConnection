@@ -1,6 +1,7 @@
 package model;
 
 import java.awt.*;
+import java.util.LinkedList;
 
 import static java.awt.Color.white;
 
@@ -44,4 +45,36 @@ public class Grille {
         return grille[x][y];
     }
 
+    public LinkedList<Case> getVoisinCouleur(Case origine){
+        LinkedList<Case> voisins = new LinkedList<Case>();
+        int xOrigine = origine.getX();
+        int yOrigine = origine.getY();
+
+        if(yOrigine-1 >= 0) {
+            Case dessus = this.grille[xOrigine][yOrigine - 1];
+            if(dessus.getColor() == origine.getColor()){
+                voisins.add(dessus);
+            }
+        }
+        if(yOrigine+1 < this.taille) {
+            Case dessous = this.grille[xOrigine][yOrigine + 1];
+            if(dessous.getColor() == origine.getColor()){
+                voisins.add(dessous);
+            }
+        }
+        if(xOrigine+1 < this.taille) {
+            Case droite = this.grille[xOrigine + 1][yOrigine];
+            if(droite.getColor() == origine.getColor()){
+                voisins.add(droite);
+            }
+        }
+        if(xOrigine-1 >=0 ) {
+            Case gauche = this.grille[xOrigine-1][yOrigine];
+            if(gauche.getColor() == origine.getColor()){
+                voisins.add(gauche);
+            }
+        }
+
+        return voisins;
+    }
 }

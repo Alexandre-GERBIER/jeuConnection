@@ -26,9 +26,9 @@ public class GestionJeu {
         } else {
             currentCase.setColor(couleur);
             if(couleur == Color.red){
-                this.rouge.add(currentCase);
+                this.rouge.add(currentCase, grille.getVoisinCouleur(currentCase));
             } else {
-                this.bleu.add(currentCase);
+                this.bleu.add(currentCase, grille.getVoisinCouleur(currentCase));
             }
             return true ;
         }
