@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a8e21612-38bf-440b-9e29-52421941a14d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/view/VueChoixMode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Grille.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Grille.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/VueChoixMode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/VueChoixMode.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -37,6 +35,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="restartRequiresConfirmation" value="false" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -118,7 +117,14 @@
       <option name="project" value="LOCAL" />
       <updated>1572947466027</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Add view package, Grille class">
+      <created>1572964783364</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1572964783364</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -144,6 +150,7 @@
     <MESSAGE value="Add main class" />
     <MESSAGE value="Add Joueur class" />
     <MESSAGE value="Add Grille class" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add Grille class" />
+    <MESSAGE value="Add view package, Grille class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add view package, Grille class" />
   </component>
 </project>
