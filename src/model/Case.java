@@ -56,4 +56,9 @@ public class Case {
         return this.parent;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        Case tmp = (Case) obj;
+        return (this.x == tmp.getX()) && (this.y == tmp.getY());
+    }
 }
