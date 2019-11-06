@@ -3,6 +3,7 @@ package controller;
 import model.Adjacence;
 import model.Case;
 import model.Grille;
+import model.Joueur;
 
 import java.awt.*;
 
@@ -21,17 +22,13 @@ public class GestionJeu {
 
 
     //TODO boolean ou exception pour case déjà colorée ?
-    public boolean colorerCase(int x, int y, Color couleur){
+    public boolean colorerCase(int x, int y, Joueur joueur){
         Case currentCase = grille.get(x,y);
         if (currentCase.getColor() != Color.white){
             return false;
         } else {
-            currentCase.setColor(couleur);
-            if(couleur == Color.red){
-                this.rouge.add(currentCase, grille.getVoisinCouleur(currentCase));
-            } else {
-                this.bleu.add(currentCase, grille.getVoisinCouleur(currentCase));
-            }
+            currentCase.setColor(joueur.getCouleur());
+
             return true ;
         }
     }
