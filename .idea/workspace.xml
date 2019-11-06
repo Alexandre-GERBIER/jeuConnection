@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a8e21612-38bf-440b-9e29-52421941a14d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/VueChoixMode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/VueChoixMode.java" afterDir="false" />
     </list>
@@ -124,7 +125,21 @@
       <option name="project" value="LOCAL" />
       <updated>1572964783364</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Modifications première vue">
+      <created>1573034597918</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1573034597918</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Modifications première vue + Joueur">
+      <created>1573042596969</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1573042596969</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -151,6 +166,8 @@
     <MESSAGE value="Add Joueur class" />
     <MESSAGE value="Add Grille class" />
     <MESSAGE value="Add view package, Grille class" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add view package, Grille class" />
+    <MESSAGE value="Modifications première vue" />
+    <MESSAGE value="Modifications première vue + Joueur" />
+    <option name="LAST_COMMIT_MESSAGE" value="Modifications première vue + Joueur" />
   </component>
 </project>
