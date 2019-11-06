@@ -1,11 +1,9 @@
-package controller;
+/*package controler;
 
 import model.Adjacence;
 import model.Case;
 import model.Grille;
 import model.Joueur;
-
-import java.awt.*;
 
 import static java.awt.Color.white;
 
@@ -32,4 +30,4 @@ public class GestionJeu {
             return true ;
         }
     }
-}
+}*/

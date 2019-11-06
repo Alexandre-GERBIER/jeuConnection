@@ -8,34 +8,34 @@ public class Joueur {
     private int points;
     private Color couleur;
 
-    public Joueur(String pseudo_, int points_, Color couleur_) {
-        this.pseudo = pseudo_;
-        this.points = points_;
-        this.couleur = couleur_;
+    public Joueur(String _pseudo, int _points, Color _couleur) {
+        this.pseudo = _pseudo;
+        this.points = _points;
+        this.couleur = _couleur;
     }
 
     public String getPseudo() {
         return pseudo;
     }
 
-    public void setPseudo(String pseudo_) {
-        this.pseudo = pseudo_;
+    public void setPseudo(String _pseudo) {
+        this.pseudo = _pseudo;
     }
 
     public int getPoints() {
         return points;
     }
 
-    public void setPoints(int points_) {
-        this.points = points_;
+    public void setPoints(int _points) {
+        this.points = _points;
     }
 
     public Color getCouleur() {
         return couleur;
     }
 
-    public void setCouleur(Color couleur_) {
-        this.couleur = couleur_;
+    public void setCouleur(Color _couleur) {
+        this.couleur = _couleur;
     }
 
 }
