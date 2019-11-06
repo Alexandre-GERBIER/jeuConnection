@@ -7,11 +7,13 @@ public class Joueur {
     private String pseudo;
     private int points;
     private Color couleur;
+    private Adjacence adjacence;
 
     public Joueur(String _pseudo, int _points, Color _couleur) {
         this.pseudo = _pseudo;
         this.points = _points;
         this.couleur = _couleur;
+        this.adjacence = new Adjacence();
     }
 
     public String getPseudo() {
