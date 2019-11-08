@@ -1,121 +1,164 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Adjacence {
-    private Case[] sommets;
-    private int rangMax;
-    private int[] scores;
+    private ArrayList<Sommet> sommets;
 
-    public Adjacence(int tailleTab){
-        this.sommets = new Case[tailleTab/2];
-        this.scores = new int[tailleTab/2];
-        this.rangMax = 0;
+    public Adjacence(){
+        this.sommets = new ArrayList<Sommet>();
     }
 
-    private Case sommet(Case origine){
+    /**
+     * @param origine case
+     * @return le sommet associé à cette case
+     */
+    private Sommet sommet(Case origine){
         while(origine.getParent() != null){
             origine = origine.getParent();
         }
-        return origine;
+        return this.findCase(origine);
     }
 
-    private int findCase(Case recherche){
-        for(int i=0;i<this.rangMax;i++){
-            if(this.sommets.equals(recherche)){
-                return i;
+    /**
+     * supprime un sommet de la liste d'adjacence et renvoie le score qui lui était associé
+     * @param sommet le sommet à supprimer
+     * @return le score associé au sommet supprimé
+     */
+    private int supprimer(Case sommet){
+        Sommet sommetAssocie = this.findCase(sommet);
+        int score = sommetAssocie.getScore();
+        this.sommets.remove(sommetAssocie);
+        return score;
+    }
+
+    /**
+     * cherche si une case est dans le tableau de sommet et renvoie le sommet associé
+     * @param recherche
+     * @return
+     */
+    private Sommet findCase(Case recherche){
+        for(int i=0;i<this.sommets.size();i++){
+            Sommet current = this.sommets.get(i);
+            if(current.getCase().equals(recherche) ){
+                return current;
             }
         }
-        return -1;
+        return null;
     }
 
+    /**
+     * ajout dans l'ordre décroissant de la taille le sommet passé en paramètre au tableau
+     * @param sommets tableau de sommets
+     * @param nouveau sommet à ajouter au tableau
+     * @param taille taille du tableau de sommet (nombre de sommets contenu)
+     * @return un tableau trié contenant les sommets du tableau d'origine et le sommet ajouté
+     */
+    private Sommet[] ajoutTrie(Sommet[] sommets, Sommet nouveau,int taille){
+        Sommet[] tri = new Sommet[taille+1];
+        int j=0;
+        for(int i=0;i<taille; i++){
+            if(sommets[i].getTaille() > nouveau.getTaille()){
+                tri[j++] = sommets[i];
+            } else {
+                tri[j++] = nouveau;
+                nouveau.setTaille(0);
+            }
+        }
+        return tri;
+    }
+
+    /**
+     * fusione les sommets contenu dans le tableau en prennant pour racine le plus gros groupe et ajoute également la case à ce groupe
+     * @param sommets tableau de sommets à fusionner trié par ordre décroissant du nombre de case par sommet
+     * @param caseAjout case à ajouter au groupe obtenu
+     * @param taille nombre de sommets dans le tableau
+     */
+    private void fusion(Sommet[] sommets,Case caseAjout, int taille){
+        Sommet nouveauSommet = sommets[0];
+        Case nouveauSommetAssocie = nouveauSommet.getCase();
+
+        caseAjout.setParent(nouveauSommetAssocie);
+        nouveauSommet.updateScore(caseAjout.getValue());
+        nouveauSommet.updateTaille(1);
+
+        for(int i=1; i<taille; i++){
+            Sommet courant = sommets[i];
+            courant.getCase().setParent(nouveauSommetAssocie);
+            nouveauSommet.updateTaille(courant.getTaille());
+            nouveauSommet.updateScore(courant.getScore());
+            this.sommets.remove(courant);
+        }
+
+
+    }
+
+
+    /**
+     * fonction d'ajout d'une case au tableau d'adjacence du joueur et mise à jour du score associé au groupe
+     * @param caseAjout la case qui vient d'être colorée à ajouter au tableau
+     * @param voisinColore liste des voisins de la même couleur que la case à ajouter
+     */
     public void add(Case caseAjout, LinkedList<Case> voisinColore){
-        int rangSommet, rangOldSommet1, rangOldSommet2;
-        Case newSommet, voisinSommet, autreVoisin1,autreVoisin2,oldSommet1,oldSommet2;
+        Sommet[] sommets;
+        Case voisinSommet, autreVoisin1,autreVoisin2;
         switch(voisinColore.size()){
             case 0:
-                this.sommets[rangMax] = caseAjout;
-                this.scores[rangMax] = caseAjout.getValue();
-                this.rangMax++;
+                this.sommets.add(new Sommet(caseAjout));
                 break;
 
             case 1:
                 Case voisin = voisinColore.getFirst();
                 caseAjout.setParent(voisin);
-                Case sommetVoisin = this.sommet(voisin);
-                rangSommet = this.findCase(sommetVoisin);
-                this.scores[rangSommet] += caseAjout.getValue();
+                Sommet sommetVoisin = this.sommet(voisin);
+                sommetVoisin.updateScore(caseAjout.getValue());
+
                 break;
 
             case 2:
+                sommets = new Sommet[2];
+
                 voisinSommet = voisinColore.getFirst();
-                caseAjout.setParent(voisinSommet);
-                newSommet = this.sommet(voisinSommet);
-                rangSommet = this.findCase(newSommet);
-                this.scores[rangSommet] += caseAjout.getValue();
+                sommets[0] = this.sommet(voisinSommet);
 
                 Case autreVoisin = voisinColore.getLast();
-                Case oldSommet = this.sommet(autreVoisin);
-                oldSommet.setParent(newSommet);
-                int rangOldSommet = this.findCase(oldSommet);
-                this.scores[rangSommet] += this.scores[rangOldSommet];
-                this.scores[rangOldSommet] = 0;
-                this.sommets[rangOldSommet] = null;
+                sommets = this.ajoutTrie(sommets, this.sommet(autreVoisin),1);
+
+                this.fusion(sommets, caseAjout,2);
                 break;
 
             case 3 :
+                sommets = new Sommet[3];
+
                 voisinSommet = voisinColore.getFirst();
-                caseAjout.setParent(voisinSommet);
-                newSommet = this.sommet(voisinSommet);
-                rangSommet = this.findCase(newSommet);
-                this.scores[rangSommet] += caseAjout.getValue();
+                sommets[0] = this.sommet(voisinSommet);
 
                 autreVoisin1 = voisinColore.get(1);
-                oldSommet1 = this.sommet(autreVoisin1);
-                oldSommet1.setParent(newSommet);
-                rangOldSommet1 = this.findCase(oldSommet1);
-                this.scores[rangSommet] += this.scores[rangOldSommet1];
-                this.scores[rangOldSommet1] = 0;
-                this.sommets[rangOldSommet1] = null;
+                sommets = this.ajoutTrie(sommets, this.sommet(autreVoisin1),1);;
 
                 autreVoisin2 = voisinColore.get(2);
-                oldSommet2 = this.sommet(autreVoisin2);
-                oldSommet2.setParent(newSommet);
-                rangOldSommet2 = this.findCase(oldSommet2);
-                this.scores[rangSommet] += this.scores[rangOldSommet2];
-                this.scores[rangOldSommet2] = 0;
-                this.sommets[rangOldSommet2] = null;
+                sommets = this.ajoutTrie(sommets, this.sommet(autreVoisin2),2);
+
+                this.fusion(sommets,caseAjout,3);
+                break;
 
             case 4:
+                sommets = new Sommet[4];
+
                 voisinSommet = voisinColore.getFirst();
-                caseAjout.setParent(voisinSommet);
-                newSommet = this.sommet(voisinSommet);
-                rangSommet = this.findCase(newSommet);
-                this.scores[rangSommet] += caseAjout.getValue();
+                sommets[0] = this.sommet(voisinSommet);
 
                 autreVoisin1 = voisinColore.get(1);
-                oldSommet1 = this.sommet(autreVoisin1);
-                oldSommet1.setParent(newSommet);
-                rangOldSommet1 = this.findCase(oldSommet1);
-                this.scores[rangSommet] += this.scores[rangOldSommet1];
-                this.scores[rangOldSommet1] = 0;
-                this.sommets[rangOldSommet1] = null;
+                sommets = this.ajoutTrie(sommets, this.sommet(autreVoisin1),1);
 
                 autreVoisin2 = voisinColore.get(2);
-                oldSommet2 = this.sommet(autreVoisin2);
-                oldSommet2.setParent(newSommet);
-                rangOldSommet2 = this.findCase(oldSommet2);
-                this.scores[rangSommet] += this.scores[rangOldSommet2];
-                this.scores[rangOldSommet2] = 0;
-                this.sommets[rangOldSommet2] = null;
+                sommets = this.ajoutTrie(sommets, this.sommet(autreVoisin2),2);
 
                 Case autreVoisin3 = voisinColore.get(3);
-                Case oldSommet3 = this.sommet(autreVoisin3);
-                oldSommet3.setParent(newSommet);
-                int rangOldSommet3 = this.findCase(oldSommet3);
-                this.scores[rangSommet] += this.scores[rangOldSommet3];
-                this.scores[rangOldSommet3] = 0;
-                this.sommets[rangOldSommet3] = null;
+                sommets = this.ajoutTrie(sommets, this.sommet(autreVoisin3),3);
+
+                this.fusion(sommets,caseAjout,4);
         }
     }
 }
