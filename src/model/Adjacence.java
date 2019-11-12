@@ -5,6 +5,7 @@ import java.util.LinkedList;
 
 public class Adjacence {
     private ArrayList<Sommet> sommets;
+    private int score;
 
     public Adjacence(){
         this.sommets = new ArrayList<Sommet>();
@@ -91,10 +92,11 @@ public class Adjacence {
             }
             this.sommets.remove(courant);
         }
-
-
     }
 
+    public int getScore(){
+        return this.score;
+    }
 
     /**
      * fonction d'ajout d'une case au tableau d'adjacence du joueur et mise à jour du score associé au groupe
@@ -111,7 +113,6 @@ public class Adjacence {
 
             case 1:
                 Case voisin = voisinColore.getFirst();
-                //TODO récuperer sommet associé au voisin
                 Sommet sommetVoisin = this.sommet(voisin);
                 caseAjout.setParent(sommetVoisin.getCase());
                 sommetVoisin.ajouterCase(caseAjout);
@@ -162,5 +163,16 @@ public class Adjacence {
 
                 this.fusion(sommets,caseAjout,4);
         }
+
+        int max = 0;
+        for (Sommet courant : this.sommets){
+           if(courant.getScore() > max ){
+               max = courant.getScore();
+           }
+        }
+
+        this.score = max;
+
+
     }
 }
