@@ -24,19 +24,19 @@ public class Case {
         return y;
     }
 
-    public int getValue() {
+    public int getValeur() {
         return valeur;
     }
 
-    public void setValue(int _value) {
+    public void setValeur(int _value) {
         this.valeur = _value;
     }
 
-    public Color getColor() {
+    public Color getCouleur() {
         return couleur;
     }
 
-    public void setColor(Color _color) {
+    public void setCouleur(Color _color) {
         this.couleur = _color;
     }
 
