@@ -9,6 +9,7 @@ import java.awt.*;
 public class VueJeu extends JFrame {
 
     private GestionJeu jeu;
+    private JTextArea j1points, j2points;
 
     public VueJeu(GestionJeu _jeu) {
         this.jeu = _jeu;
@@ -22,37 +23,37 @@ public class VueJeu extends JFrame {
         panel.add(panelGrilleBoutons, BorderLayout.CENTER);
 
         //Panel SOUTH, infos joueurs
-        JPanel panelJoueurs = new JPanel(new GridLayout(2, 1));
+        JPanel panelJoueurs = new JPanel(new GridLayout(1, 2));
         panel.add(panelJoueurs, BorderLayout.SOUTH);
 
-        //Panel joueurs
-        JPanel panelInfosJoueurs = new JPanel(new GridLayout(2, 1));
-        panelJoueurs.add(panelInfosJoueurs);
-
         //Panel J1
-        JPanel panelJ1 = new JPanel(new GridLayout(2, 1));
-        panelInfosJoueurs.add(panelJ1);
+        JPanel panelJ1 = new JPanel();
+        panelJ1.setLayout(new BoxLayout(panelJ1, BoxLayout.Y_AXIS));
+        panelJoueurs.add(panelJ1);
+
         JTextArea j1pseudo = new JTextArea(jeu.getP1().getPseudo());
-        j1pseudo.setMargin(new Insets(this.getHeight()/10, this.getWidth()/10, this.getHeight()/10, this.getWidth()/10));
         j1pseudo.setForeground(jeu.getP1().getCouleur());
         j1pseudo.setOpaque(false);
         j1pseudo.setEditable(false);
         panelJ1.add(j1pseudo);
-        JTextArea j1points = new JTextArea(String.valueOf(jeu.getP1().getPoints()));
+
+        j1points = new JTextArea(String.valueOf(jeu.getP1().getPoints()));
         j1points.setOpaque(false);
         j1points.setEditable(false);
         panelJ1.add(j1points);
 
         //Panel J2
-        JPanel panelJ2 = new JPanel(new GridLayout(2, 1));
-        panelInfosJoueurs.add(panelJ2);
+        JPanel panelJ2 = new JPanel();
+        panelJ2.setLayout(new BoxLayout(panelJ2, BoxLayout.Y_AXIS));
+        panelJoueurs.add(panelJ2);
+
         JTextArea j2pseudo = new JTextArea(jeu.getP2().getPseudo());
-        j2pseudo.setMargin(new Insets(this.getHeight()/10, this.getWidth()/10, this.getHeight()/10, this.getWidth()/10));
         j2pseudo.setForeground(jeu.getP2().getCouleur());
         j2pseudo.setOpaque(false);
         j2pseudo.setEditable(false);
         panelJ2.add(j2pseudo);
-        JTextArea j2points = new JTextArea(String.valueOf(jeu.getP2().getPoints()));
+
+        j2points = new JTextArea(String.valueOf(jeu.getP2().getPoints()));
         j2points.setOpaque(false);
         j2points.setEditable(false);
         panelJ2.add(j2points);
@@ -65,7 +66,7 @@ public class VueJeu extends JFrame {
             for(int j=0; j<tailleGrille; j++) {
                 Case caseActuelle = jeu.getGrille().get(i, j);
                 JButton bouton = new JButton(String.valueOf(caseActuelle.getValeur()));
-                bouton.addActionListener(new CaseControlleur(caseActuelle,jeu,bouton));
+                bouton.addActionListener(new CaseControlleur(caseActuelle, jeu, bouton, this));
                 bouton.setBackground(caseActuelle.getCouleur());
                 panelGrilleBoutons.add(bouton);
             }
@@ -80,4 +81,19 @@ public class VueJeu extends JFrame {
         this.setVisible(true);
     }
 
+    public JTextArea getJ1points() {
+        return j1points;
+    }
+
+    public void setJ1points(int _j1points) {
+        this.j1points.setText(String.valueOf(_j1points));
+    }
+
+    public JTextArea getJ2points() {
+        return j2points;
+    }
+
+    public void setJ2points(int _j2points) {
+        this.j2points.setText(String.valueOf(_j2points));
+    }
 }
