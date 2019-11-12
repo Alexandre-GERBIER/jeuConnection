@@ -1,7 +1,10 @@
 package model;
 
 import java.awt.*;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.LinkedList;
+import java.util.Scanner;
 
 import static java.awt.Color.white;
 
@@ -14,7 +17,25 @@ public class Grille {
         this.taille = n;
         this.valMax = k;
         this.grille = new Case[n][n];
-        remplirGrilleAléatoire(grille);
+        remplirGrilleAléatoire();
+    }
+
+    public Grille(String fichier) {
+
+        File file = new File(fichier);
+
+        try {
+            Scanner sc = new Scanner(file);
+
+
+            while (sc.hasNextLine()) {
+                int i = sc.nextInt();
+                System.out.println(i);
+            }
+            sc.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public int taille() {
@@ -33,10 +54,10 @@ public class Grille {
         return (int) (Math.random()*(this.valMax-1)+1);
     }
 
-    private void remplirGrilleAléatoire(Case[][] grille){
-        for(int i=0; i<taille; i++){
-            for(int j=0; j<taille; j++){
-                grille[i][j] = new Case(i,j,caseValue(),white);
+    private void remplirGrilleAléatoire(){
+        for(int i=0; i<this.taille; i++){
+            for(int j=0; j<this.taille; j++){
+                this.grille[i][j] = new Case(i,j,caseValue(),white);
             }
         }
     }

@@ -80,14 +80,15 @@ public class Adjacence {
         Case nouveauSommetAssocie = nouveauSommet.getCase();
 
         caseAjout.setParent(nouveauSommetAssocie);
-        nouveauSommet.updateScore(caseAjout.getValue());
-        nouveauSommet.updateTaille(1);
+        nouveauSommet.ajouterCase(caseAjout);
 
         for(int i=1; i<taille; i++){
             Sommet courant = sommets[i];
             courant.getCase().setParent(nouveauSommetAssocie);
-            nouveauSommet.updateTaille(courant.getTaille());
-            nouveauSommet.updateScore(courant.getScore());
+            LinkedList<Case> filsCourant = courant.getCases();
+            while(!filsCourant.isEmpty()){
+                nouveauSommet.ajouterCase(filsCourant.pop());
+            }
             this.sommets.remove(courant);
         }
 
@@ -110,9 +111,10 @@ public class Adjacence {
 
             case 1:
                 Case voisin = voisinColore.getFirst();
-                caseAjout.setParent(voisin);
+                //TODO récuperer sommet associé au voisin
                 Sommet sommetVoisin = this.sommet(voisin);
-                sommetVoisin.updateScore(caseAjout.getValue());
+                caseAjout.setParent(sommetVoisin.getCase());
+                sommetVoisin.ajouterCase(caseAjout);
 
                 break;
 
