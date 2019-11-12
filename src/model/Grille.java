@@ -6,9 +6,6 @@ import java.io.FileNotFoundException;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-import static java.awt.Color.blue;
-import static java.awt.Color.white;
-
 public class Grille {
 
     private int taille, valMax;
@@ -51,15 +48,15 @@ public class Grille {
                 for(String courant : cases){
                     switch(Integer.parseInt(courant)){
                         case 0:
-                            this.grille[i][j].setCouleur(white);
+                            this.grille[i][j].setCouleur(Color.WHITE);
                             break;
 
                         case 1:
-                            this.grille[i][j].setCouleur(blue);
+                            this.grille[i][j].setCouleur(Color.BLUE);
                             break;
 
                         case 2:
-                            this.grille[i][j].setCouleur(Color.red);
+                            this.grille[i][j].setCouleur(Color.RED);
                             break;
                     }
                     j++;
@@ -72,11 +69,11 @@ public class Grille {
         }
     }
 
-    public int taille() {
+    public int getTaille() {
         return taille;
     }
 
-    public int getvalMax() {
+    public int getValMax() {
         return valMax;
     }
 
@@ -91,7 +88,7 @@ public class Grille {
     private void remplirGrilleAléatoire(){
         for(int i=0; i<this.taille; i++){
             for(int j=0; j<this.taille; j++){
-                this.grille[i][j] = new Case(i,j,caseValue(),white);
+                this.grille[i][j] = new Case(i,j,caseValue(),Color.WHITE);
             }
         }
     }

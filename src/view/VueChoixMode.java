@@ -7,98 +7,119 @@ import java.awt.*;
 
 public class VueChoixMode extends JFrame {
 
-    private JTextField p1name, p2name;
+    private JTextField j1name, j2name, tailleGrille, valeurCases;
 
     public VueChoixMode() {
         //Panel initial
         JPanel panel = new JPanel(new BorderLayout());
 
-        //Partie haute du grid layout initial. Panel du game mode
-        JPanel gameModePanel = new JPanel();
-        gameModePanel.setLayout(new BoxLayout(gameModePanel, BoxLayout.X_AXIS));
-        gameModePanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(gameModePanel, BorderLayout.NORTH);
+        //Partie haute du border layout initial. Panel du game mode
+        JPanel panelMode = new JPanel();
+        panel.add(panelMode, BorderLayout.NORTH);
 
-        //Partie basse du grid layout initial. Panel des players
-        JPanel playersPanel = new JPanel(new GridLayout(1, 2));
-        panel.add(playersPanel, BorderLayout.CENTER);
+        //Partie centrale du border layout initial. Panel des players
+        JPanel panelJoueurs = new JPanel(new GridLayout(1, 2));
+        panel.add(panelJoueurs, BorderLayout.CENTER);
+
+        //Partie basse du border layout initial. Panel bouton valider
+        JPanel panelValidation = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        panel.add(panelValidation, BorderLayout.SOUTH);
 
         //Panel du P1
-        JPanel p1panel = new JPanel();
-        p1panel.setLayout(new BoxLayout(p1panel, BoxLayout.Y_AXIS));
-        playersPanel.add(p1panel);
+        JPanel j1panel = new JPanel();
+        j1panel.setLayout(new BoxLayout(j1panel, BoxLayout.Y_AXIS));
+        panelJoueurs.add(j1panel);
 
         //Panel du P2
-        JPanel p2panel = new JPanel();
-        p2panel.setLayout(new BoxLayout(p2panel, BoxLayout.Y_AXIS));
-        playersPanel.add(p2panel);
+        JPanel j2panel = new JPanel();
+        j2panel.setLayout(new BoxLayout(j2panel, BoxLayout.Y_AXIS));
+        panelJoueurs.add(j2panel);
+
+        //Panel des boutons radio
+        JPanel panelRadio = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        panelMode.add(panelRadio);
+
+        //Panel paramètres de la grille
+        JPanel panelParams = new JPanel();
+        panelParams.setLayout(new BoxLayout(panelParams, BoxLayout.Y_AXIS));
+        panelMode.add(panelParams);
 
         //Boutons de choix du mode de jeu
-        ButtonGroup gameModeButtonGroup = new ButtonGroup();
+        ButtonGroup groupeRadioMode = new ButtonGroup();
         JRadioButton multiplayer = new JRadioButton("Multiplayer");
-        gameModeButtonGroup.add(multiplayer);
+        multiplayer.setSelected(true);
+        groupeRadioMode.add(multiplayer);
         JRadioButton bot = new JRadioButton("Bot");
-        gameModeButtonGroup.add(bot);
+        groupeRadioMode.add(bot);
 
-        gameModePanel.add(multiplayer);
-        gameModePanel.add(bot);
+        panelMode.add(multiplayer);
+        panelMode.add(bot);
 
         //Joueur 1
-        JPanel p1labelPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        JTextArea p1text = new JTextArea("Joueur 1");
-        p1text.setOpaque(false);
-        p1text.setEditable(false);
-        p1labelPanel.add(p1text);
-        p1panel.add(p1labelPanel);
+        JPanel panelJ1label = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JTextArea j1text = new JTextArea("Joueur 1");
+        j1text.setOpaque(false);
+        j1text.setEditable(false);
+        panelJ1label.add(j1text);
+        j1panel.add(panelJ1label);
 
-        p1name = new JTextField();
-        p1panel.add(p1name);
-
-        JPanel p1colorPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        JButton p1color = new JButton("Couleur");
-        p1colorPanel.add(p1color);
-        p1panel.add(p1colorPanel);
+        j1name = new JTextField();
+        j1panel.add(j1name);
 
         //Joueur 2
-        JPanel p2labelPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        JTextArea p2text = new JTextArea("Joueur 2");
-        p2text.setOpaque(false);
-        p2text.setEditable(false);
-        p2labelPanel.add(p2text);
-        p2panel.add(p2labelPanel);
+        JPanel panelJ2label = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JTextArea j2text = new JTextArea("Joueur 2");
+        j2text.setOpaque(false);
+        j2text.setEditable(false);
+        panelJ2label.add(j2text);
+        j2panel.add(panelJ2label);
 
-        p2name = new JTextField();
-        p2panel.add(p2name);
+        j2name = new JTextField();
+        j2panel.add(j2name);
 
-        JPanel p2colorPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        JButton p2color = new JButton("Couleur");
-        p2color.addActionListener(new LancementJeu(this));
-        p2colorPanel.add(p2color);
-        p2panel.add(p2colorPanel);
+        //Paramètres grille
+        JTextArea tailleGrilleText = new JTextArea("Taille de la grille");
+        tailleGrilleText.setOpaque(false);
+        tailleGrilleText.setEditable(false);
+        panelParams.add(tailleGrilleText);
+        tailleGrille = new JTextField();
+        panelParams.add(tailleGrille);
+        JTextArea valeurCasesText = new JTextArea("Valeur max des cases");
+        valeurCasesText.setOpaque(false);
+        valeurCasesText.setEditable(false);
+        panelParams.add(valeurCasesText);
+        valeurCases = new JTextField();
+        panelParams.add(valeurCases);
+
+        //Validation
+        JButton validation = new JButton("Valider");
+        validation.addActionListener(new LancementJeu(this));
+        panelValidation.add(validation);
 
         //Paramètres de la JFrame
         this.setTitle("Choix du mode de jeu");
-        this.setSize(300, 150);
+        this.setSize(350, 220);
+        this.setMinimumSize(new Dimension(350, 220));
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setContentPane(panel);
         this.setVisible(true);
     }
 
-    public JTextField getP1name() {
-        return p1name;
+    public JTextField getJ1name() {
+        return j1name;
     }
 
-    public void setP1name(JTextField _p1name) {
-        this.p1name = _p1name;
+    public JTextField getJ2name() {
+        return j2name;
     }
 
-    public JTextField getP2name() {
-        return p2name;
+    public JTextField getTailleGrille() {
+        return tailleGrille;
     }
 
-    public void setP2name(JTextField _p2name) {
-        this.p2name = _p2name;
+    public JTextField getValeurCases() {
+        return valeurCases;
     }
 
 }
