@@ -20,8 +20,10 @@ public class CaseControlleur implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-        this.jeu.colorerCase(this.caseAssociee,jeu.getJoueurCourant());
+        boolean valide = this.jeu.colorerCase(this.caseAssociee,jeu.getJoueurCourant());
         this.boutonAssocie.setBackground(this.caseAssociee.getCouleur());
-        this.jeu.nouveauTour();
+        if(valide){
+            this.jeu.nouveauTour();
+        }
     }
 }
