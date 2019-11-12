@@ -1,30 +1,30 @@
 package controler;
 
 import model.*;
+
+import javax.swing.*;
 import java.awt.*;
 
 public class GestionJeu {
 
     private Grille grille;
-    private Joueur p1, p2;
+    private Joueur p1, p2, joueurCourant;
+    private int tour = 0;
 
     public GestionJeu(Grille _grille, Joueur _p1, Joueur _p2) {
         this.grille = _grille;
         this.p1 = _p1;
         this.p2 = _p2;
-    }
-
-    public void initJeu() {
-
+        this.joueurCourant = this.p1;
     }
 
     //TODO boolean ou exception pour case déjà colorée ?
-    public boolean colorerCase(int x, int y, Joueur joueur) {
-        Case currentCase = grille.get(x,y);
-        if (currentCase.getCouleur() != Color.white) {
+    public boolean colorerCase(Case caseAColorer, Joueur joueur) {
+        if (caseAColorer.getCouleur() != Color.white) {
             return false;
         } else {
-            currentCase.setCouleur(joueur.getCouleur());
+
+            caseAColorer.setCouleur(joueur.getCouleur());
             return true;
         }
 
@@ -52,5 +52,22 @@ public class GestionJeu {
 
     public void setP2(Joueur _p2) {
         this.p2 = _p2;
+    }
+
+    public Joueur getJoueurCourant(){
+        return this.joueurCourant;
+    }
+
+    public void nouveauTour() {
+        if (tour < this.grille.getTaille() * this.grille.getTaille()) {
+            if (joueurCourant.equals(p1)) {
+                joueurCourant = p2;
+            } else {
+                joueurCourant = p1;
+            }
+            this.tour += 1;
+        } else {
+            JOptionPane.showMessageDialog(new JFrame("Fin"), "C fini");
+        }
     }
 }
