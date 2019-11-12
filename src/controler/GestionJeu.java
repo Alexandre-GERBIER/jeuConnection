@@ -21,10 +21,10 @@ public class GestionJeu {
     //TODO boolean ou exception pour case déjà colorée ?
     public boolean colorerCase(int x, int y, Joueur joueur) {
         Case currentCase = grille.get(x,y);
-        if (currentCase.getColor() != Color.white) {
+        if (currentCase.getCouleur() != Color.white) {
             return false;
         } else {
-            currentCase.setColor(joueur.getCouleur());
+            currentCase.setCouleur(joueur.getCouleur());
             return true;
         }
 

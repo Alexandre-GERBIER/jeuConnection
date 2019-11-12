@@ -1,5 +1,7 @@
 package view;
 
+import controler.LancementJeu;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -70,6 +72,7 @@ public class VueChoixMode extends JFrame {
 
         JPanel p2colorPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JButton p2color = new JButton("Couleur");
+        p2color.addActionListener(new LancementJeu(this));
         p2colorPanel.add(p2color);
         p2panel.add(p2colorPanel);
 

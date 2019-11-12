@@ -14,6 +14,8 @@ public class VueJeu extends JFrame {
 
         //Panel initial
         JPanel panel = new JPanel();
+        JTextArea txt = new JTextArea(jeu.getP1().getPseudo() + " " + jeu.getP2().getPseudo());
+        panel.add(txt);
 
         //Paramètres de la JFrame
         this.setTitle("Choix du mode de jeu");
