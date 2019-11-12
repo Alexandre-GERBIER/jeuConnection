@@ -10,13 +10,13 @@ public class Sommet {
 
     public Sommet(Case newSommet){
         this.sommet = newSommet;
-        this.score = newSommet.getValue();
+        this.score = newSommet.getValeur();
         this.taille = 1;
         this.cases = new LinkedList<Case>();
     }
 
     public void ajouterCase(Case newCase){
-        this.score += newCase.getValue();
+        this.score += newCase.getValeur();
         this.taille += 1;
         this.cases.add(newCase);
     }

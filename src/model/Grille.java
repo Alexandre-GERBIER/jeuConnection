@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+import static java.awt.Color.blue;
 import static java.awt.Color.white;
 
 public class Grille {
@@ -21,16 +22,49 @@ public class Grille {
     }
 
     public Grille(String fichier) {
-
         File file = new File(fichier);
 
         try {
             Scanner sc = new Scanner(file);
+            int n = Integer.parseInt(sc.next());
+            int k = Integer.parseInt(sc.next());
+            this.grille = new Case[n][n];
 
+            int i = 0;
 
-            while (sc.hasNextLine()) {
-                int i = sc.nextInt();
-                System.out.println(i);
+            while (i<n) {
+                int j=0;
+                String ligne = sc.nextLine();
+                String[] cases = ligne.split(" ");
+                for(String courant : cases){
+                    this.grille[i][j].setValeur(Integer.parseInt(courant));
+                    j++;
+                }
+                i++;
+            }
+
+            i = 0;
+            while (i<n) {
+                int j=0;
+                String ligne = sc.nextLine();
+                String[] cases = ligne.split(" ");
+                for(String courant : cases){
+                    switch(Integer.parseInt(courant)){
+                        case 0:
+                            this.grille[i][j].setCouleur(white);
+                            break;
+
+                        case 1:
+                            this.grille[i][j].setCouleur(blue);
+                            break;
+
+                        case 2:
+                            this.grille[i][j].setCouleur(Color.red);
+                            break;
+                    }
+                    j++;
+                }
+                i++;
             }
             sc.close();
         } catch (FileNotFoundException e) {
@@ -73,25 +107,25 @@ public class Grille {
 
         if(yOrigine-1 >= 0) {
             Case dessus = this.grille[xOrigine][yOrigine - 1];
-            if(dessus.getColor() == origine.getColor()){
+            if(dessus.getCouleur() == origine.getCouleur()){
                 voisins.add(dessus);
             }
         }
         if(yOrigine+1 < this.taille) {
             Case dessous = this.grille[xOrigine][yOrigine + 1];
-            if(dessous.getColor() == origine.getColor()){
+            if(dessous.getCouleur() == origine.getCouleur()){
                 voisins.add(dessous);
             }
         }
         if(xOrigine+1 < this.taille) {
             Case droite = this.grille[xOrigine + 1][yOrigine];
-            if(droite.getColor() == origine.getColor()){
+            if(droite.getCouleur() == origine.getCouleur()){
                 voisins.add(droite);
             }
         }
         if(xOrigine-1 >=0 ) {
             Case gauche = this.grille[xOrigine-1][yOrigine];
-            if(gauche.getColor() == origine.getColor()){
+            if(gauche.getCouleur() == origine.getCouleur()){
                 voisins.add(gauche);
             }
         }
