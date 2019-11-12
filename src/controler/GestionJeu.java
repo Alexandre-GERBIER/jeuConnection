@@ -59,7 +59,7 @@ public class GestionJeu {
     }
 
     public void nouveauTour() {
-        if (tour <= this.grille.getTaille() * this.grille.getTaille()) {
+        if (tour < (this.grille.getTaille() * this.grille.getTaille())-1) {
             if (joueurCourant.equals(p1)) {
                 joueurCourant = p2;
             } else {
