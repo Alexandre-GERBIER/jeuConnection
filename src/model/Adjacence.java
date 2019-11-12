@@ -15,11 +15,12 @@ public class Adjacence {
      * @param origine case
      * @return le sommet associé à cette case
      */
-    private Sommet sommet(Case origine){
-        while(origine.getParent() != null){
-            origine = origine.getParent();
+    public Sommet sommet(Case origine){
+        if(origine.getParent() == null){
+            return this.findCase(origine);
+        } else {
+            return this.sommet(origine.getParent());
         }
-        return this.findCase(origine);
     }
 
     /**
@@ -32,6 +33,11 @@ public class Adjacence {
         int score = sommetAssocie.getScore();
         this.sommets.remove(sommetAssocie);
         return score;
+    }
+
+    public int getScore(Case composante){
+        Sommet sommet = this.sommet(composante);
+        return sommet.getScore();
     }
 
     /**

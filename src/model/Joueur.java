@@ -1,6 +1,7 @@
 package model;
 
 import java.awt.Color;
+import java.util.LinkedList;
 
 public class Joueur {
 
@@ -32,6 +33,14 @@ public class Joueur {
 
     public void setCouleur(Color _couleur) {
         this.couleur = _couleur;
+    }
+
+    public int scoreGroupe(Case composante){
+        return this.adjacence.getScore(composante);
+    }
+
+    public void ajouterCase(Case newCase, LinkedList<Case> voisins){
+        this.adjacence.add(newCase,voisins);
     }
 
 }
