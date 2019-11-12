@@ -5,8 +5,9 @@ import java.awt.*;
 
 public class VueChoixMode extends JFrame {
 
-    public VueChoixMode() {
+    private JTextField p1name, p2name;
 
+    public VueChoixMode() {
         //Panel initial
         JPanel panel = new JPanel(new BorderLayout());
 
@@ -48,8 +49,8 @@ public class VueChoixMode extends JFrame {
         p1labelPanel.add(p1text);
         p1panel.add(p1labelPanel);
 
-        JTextField p1 = new JTextField();
-        p1panel.add(p1);
+        p1name = new JTextField();
+        p1panel.add(p1name);
 
         JPanel p1colorPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JButton p1color = new JButton("Couleur");
@@ -64,8 +65,8 @@ public class VueChoixMode extends JFrame {
         p2labelPanel.add(p2text);
         p2panel.add(p2labelPanel);
 
-        JTextField p2 = new JTextField();
-        p2panel.add(p2);
+        p2name = new JTextField();
+        p2panel.add(p2name);
 
         JPanel p2colorPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JButton p2color = new JButton("Couleur");
@@ -79,6 +80,22 @@ public class VueChoixMode extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setContentPane(panel);
         this.setVisible(true);
+    }
+
+    public JTextField getP1name() {
+        return p1name;
+    }
+
+    public void setP1name(JTextField _p1name) {
+        this.p1name = _p1name;
+    }
+
+    public JTextField getP2name() {
+        return p2name;
+    }
+
+    public void setP2name(JTextField _p2name) {
+        this.p2name = _p2name;
     }
 
 }
