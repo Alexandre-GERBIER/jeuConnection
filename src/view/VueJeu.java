@@ -65,6 +65,7 @@ public class VueJeu extends JFrame {
             for(int j=0; j<tailleGrille; j++) {
                 Case caseActuelle = jeu.getGrille().get(i, j);
                 JButton bouton = new JButton(String.valueOf(caseActuelle.getValeur()));
+                bouton.addActionListener(new CaseControlleur(caseActuelle,jeu,bouton));
                 bouton.setBackground(caseActuelle.getCouleur());
                 panelGrilleBoutons.add(bouton);
             }
