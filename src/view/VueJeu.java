@@ -21,9 +21,9 @@ public class VueJeu extends JFrame {
         JPanel panelGrilleBoutons = new JPanel(new GridLayout(tailleGrille, tailleGrille));
         panel.add(panelGrilleBoutons, BorderLayout.CENTER);
 
-        //Panel WEST, infos joueurs
+        //Panel SOUTH, infos joueurs
         JPanel panelJoueurs = new JPanel(new GridLayout(2, 1));
-        panel.add(panelJoueurs, BorderLayout.WEST);
+        panel.add(panelJoueurs, BorderLayout.SOUTH);
 
         //Panel joueurs
         JPanel panelInfosJoueurs = new JPanel(new GridLayout(2, 1));
