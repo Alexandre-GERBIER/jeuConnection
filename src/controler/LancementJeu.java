@@ -1,8 +1,11 @@
 package controler;
 
+import model.Grille;
 import model.Joueur;
 import view.VueChoixMode;
+import view.VueJeu;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -16,9 +19,16 @@ public class LancementJeu implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-        if(!infos.getP1name().getText().trim().isEmpty() && !infos.getP2name().getText().trim().isEmpty()) {
-            //Joueur j1 = new Joueur();
-            //Joueur j2 = new Joueur();
+        String p1name = infos.getP1name().getText().trim();
+        String p2name = infos.getP2name().getText().trim();
+
+        if(!p1name.isEmpty() && p2name.isEmpty()) {
+            Joueur p1 = new Joueur(p1name, 0, Color.BLUE);
+            Joueur p2 = new Joueur(p2name, 0, Color.RED);
+            GestionJeu jeu = new GestionJeu(new Grille(10, 10), p1, p2);
+
+            VueJeu vueJeu = new VueJeu(jeu);
+            infos.dispose();
         }
 
     }
