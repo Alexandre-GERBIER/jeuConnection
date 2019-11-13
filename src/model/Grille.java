@@ -3,6 +3,8 @@ package model;
 import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -53,6 +55,7 @@ public class Grille {
 
                         case 1:
                             this.grille[i][j].setCouleur(Color.BLUE);
+                            //TODO gérer ajout case à adjacence de chaque joueur
                             break;
 
                         case 2:
@@ -128,5 +131,38 @@ public class Grille {
         }
 
         return voisins;
+    }
+
+    public void ecrireFichier() throws Exception{
+        String entete =""+this.taille+" "+this.valMax;
+        String valeurs = "";
+        String couleurs = "";
+
+        for(int i=0; i<this.taille; i++){
+            couleurs = couleurs.concat("\n");
+            valeurs = valeurs.concat("\n");
+            for(int j=0;j<this.taille; j++){
+                Case courante = this.grille[i][j];
+                int couleur = 0;
+                if(courante.getCouleur().equals(Color.WHITE)) {
+                    couleur = 0;
+                } else {
+                    if(courante.getCouleur().equals(Color.RED)){
+                        couleur = 1;
+                    } else {
+                        if(courante.getCouleur().equals(Color.BLUE)){
+                            couleur = 2;
+                        }
+                    }
+                }
+                couleurs = couleurs.concat("" + couleur);
+                valeurs = valeurs.concat("" + courante.getValeur());
+            }
+        }
+        //TODO ajouter dossier de sauvegardes et tiestamp dans le nom du fichier
+        String fileContent = entete + valeurs + couleurs;
+        FileWriter fileWriter = new FileWriter("sauv/fichier.txt");
+        fileWriter.write(fileContent);
+        fileWriter.close();
     }
 }
