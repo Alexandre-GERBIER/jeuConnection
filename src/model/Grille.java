@@ -3,7 +3,6 @@ package model;
 import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -20,13 +19,16 @@ public class Grille {
         remplirGrilleAléatoire();
     }
 
-    public Grille(String fichier) {
+    public Grille(String fichier, Joueur j1, Joueur j2) {
         File file = new File(fichier);
 
         try {
             Scanner sc = new Scanner(file);
-            int n = Integer.parseInt(sc.next());
-            int k = Integer.parseInt(sc.next());
+            String[] firstLine = sc.nextLine().split("");
+            int n = Integer.parseInt(firstLine[0]);
+            this.taille = n;
+            int k = Integer.parseInt(firstLine[1]);
+            this.valMax = k;
             this.grille = new Case[n][n];
 
             int i = 0;
@@ -36,7 +38,7 @@ public class Grille {
                 String ligne = sc.nextLine();
                 String[] cases = ligne.split(" ");
                 for(String courant : cases){
-                    this.grille[i][j].setValeur(Integer.parseInt(courant));
+                    this.grille[i][j] = new Case(i, j, Integer.parseInt(courant), Color.WHITE);
                     j++;
                 }
                 i++;
@@ -52,14 +54,13 @@ public class Grille {
                         case 0:
                             this.grille[i][j].setCouleur(Color.WHITE);
                             break;
-
                         case 1:
                             this.grille[i][j].setCouleur(Color.BLUE);
-                            //TODO gérer ajout case à adjacence de chaque joueur
+                            j1.ajouterCase(this.grille[i][j], this.getVoisinCouleur(this.grille[i][j]));
                             break;
-
                         case 2:
                             this.grille[i][j].setCouleur(Color.RED);
+                            j2.ajouterCase(this.grille[i][j], this.getVoisinCouleur(this.grille[i][j]));
                             break;
                     }
                     j++;
