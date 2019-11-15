@@ -55,25 +55,15 @@ public class Adjacence {
         return null;
     }
 
-    /**
-     * ajout dans l'ordre décroissant de la taille le sommet passé en paramètre au tableau
-     * @param sommets tableau de sommets
-     * @param nouveau sommet à ajouter au tableau
-     * @param taille taille du tableau de sommet (nombre de sommets contenu)
-     * @return un tableau trié contenant les sommets du tableau d'origine et le sommet ajouté
-     */
-    private Sommet[] ajoutTrie(Sommet[] sommets, Sommet nouveau,int taille){
-        Sommet[] tri = new Sommet[taille+1];
-        int j=0;
-        for(int i=0;i<taille; i++){
-            if(sommets[i].getTaille() > nouveau.getTaille()){
-                tri[j++] = sommets[i];
-            } else {
-                tri[j++] = nouveau;
-                nouveau.setTaille(0);
+    private Sommet getSommetMax(ArrayList<Sommet> sommets){
+        Sommet max = sommets.get(0);
+        for(Sommet courant : sommets){
+            if(courant.getScore() > max.getScore()){
+                max = courant;
             }
         }
-        return tri;
+        sommets.remove(max);
+        return max;
     }
 
     /**
@@ -82,16 +72,18 @@ public class Adjacence {
      * @param caseAjout case à ajouter au groupe obtenu
      * @param taille nombre de sommets dans le tableau
      */
-    private void fusion(Sommet[] sommets,Case caseAjout, int taille){
-        Sommet nouveauSommet = sommets[0];
+    private void fusion(ArrayList<Sommet> sommets,Case caseAjout, int taille){
+        Sommet nouveauSommet = this.getSommetMax(sommets);
         Case nouveauSommetAssocie = nouveauSommet.getCase();
 
         caseAjout.setParent(nouveauSommetAssocie);
         nouveauSommet.ajouterCase(caseAjout);
 
         for(int i=1; i<taille; i++){
-            Sommet courant = sommets[i];
-            courant.getCase().setParent(nouveauSommetAssocie);
+            Sommet courant = this.getSommetMax(sommets);
+            Case caseOldSommet = courant.getCase();
+            caseOldSommet.setParent(nouveauSommetAssocie);
+            nouveauSommet.ajouterCase(caseOldSommet);
             LinkedList<Case> filsCourant = courant.getCases();
             while(!filsCourant.isEmpty()){
                 nouveauSommet.ajouterCase(filsCourant.pop());
@@ -110,7 +102,7 @@ public class Adjacence {
      * @param voisinColore liste des voisins de la même couleur que la case à ajouter
      */
     public void add(Case caseAjout, LinkedList<Case> voisinColore){
-        Sommet[] sommets;
+        ArrayList<Sommet> sommets = new ArrayList<Sommet>();
         Case voisinSommet, autreVoisin1,autreVoisin2;
         switch(voisinColore.size()){
             case 0:
@@ -126,46 +118,43 @@ public class Adjacence {
                 break;
 
             case 2:
-                sommets = new Sommet[2];
 
                 voisinSommet = voisinColore.getFirst();
-                sommets[0] = this.sommet(voisinSommet);
+                sommets.add(this.sommet(voisinSommet));
 
                 Case autreVoisin = voisinColore.getLast();
-                sommets = this.ajoutTrie(sommets, this.sommet(autreVoisin),1);
+                sommets.add(this.sommet(autreVoisin));
 
                 this.fusion(sommets, caseAjout,2);
                 break;
 
             case 3 :
-                sommets = new Sommet[3];
 
                 voisinSommet = voisinColore.getFirst();
-                sommets[0] = this.sommet(voisinSommet);
+                sommets.add(this.sommet(voisinSommet));
 
                 autreVoisin1 = voisinColore.get(1);
-                sommets = this.ajoutTrie(sommets, this.sommet(autreVoisin1),1);;
+                sommets.add(this.sommet(autreVoisin1));;
 
                 autreVoisin2 = voisinColore.get(2);
-                sommets = this.ajoutTrie(sommets, this.sommet(autreVoisin2),2);
+                sommets.add(this.sommet(autreVoisin2));
 
                 this.fusion(sommets,caseAjout,3);
                 break;
 
             case 4:
-                sommets = new Sommet[4];
 
                 voisinSommet = voisinColore.getFirst();
-                sommets[0] = this.sommet(voisinSommet);
+                sommets.add(this.sommet(voisinSommet));
 
                 autreVoisin1 = voisinColore.get(1);
-                sommets = this.ajoutTrie(sommets, this.sommet(autreVoisin1),1);
+                sommets.add(this.sommet(autreVoisin1));
 
                 autreVoisin2 = voisinColore.get(2);
-                sommets = this.ajoutTrie(sommets, this.sommet(autreVoisin2),2);
+                sommets.add(this.sommet(autreVoisin2));
 
                 Case autreVoisin3 = voisinColore.get(3);
-                sommets = this.ajoutTrie(sommets, this.sommet(autreVoisin3),3);
+                sommets.add(this.sommet(autreVoisin3));
 
                 this.fusion(sommets,caseAjout,4);
         }

@@ -21,9 +21,13 @@ public class GestionJeu {
     //TODO boolean ou exception pour case déjà colorée ?
     public boolean colorerCase(Case caseAColorer, Joueur joueur) {
         if (caseAColorer.getCouleur() != Color.white) {
-            if (caseAColorer.getCouleur().equals(joueur.getCouleur())) {
-                JOptionPane.showMessageDialog(new JFrame("Score zone"), "score : " + joueur.scoreGroupe(caseAColorer));
+            Joueur possedeCase ;
+            if(caseAColorer.getCouleur().equals(Color.BLUE)){
+                possedeCase = this.p1;
+            } else {
+                possedeCase = this.p2;
             }
+            JOptionPane.showMessageDialog(new JFrame("Score zone"), "score : " + possedeCase.scoreGroupe(caseAColorer));
             return false;
         } else {
             caseAColorer.setCouleur(joueur.getCouleur());
