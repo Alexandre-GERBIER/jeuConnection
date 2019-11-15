@@ -9,7 +9,7 @@ import java.awt.*;
 public class VueJeu extends JFrame {
 
     private GestionJeu jeu;
-    private JTextArea j1points, j2points;
+    private JLabel j1points, j2points;
 
     public VueJeu(GestionJeu _jeu) {
         this.jeu = _jeu;
@@ -23,44 +23,55 @@ public class VueJeu extends JFrame {
         panel.add(panelGrilleBoutons, BorderLayout.CENTER);
 
         //Panel SOUTH, infos joueurs
-        JPanel panelJoueurs = new JPanel(new GridLayout(1, 2));
+        JPanel panelJoueurs = new JPanel(new GridLayout(1, 3));
         panel.add(panelJoueurs, BorderLayout.SOUTH);
 
+        //Panel NORTH, infos partie
+        JPanel panelInfosPartie = new JPanel();
+        panel.add(panelInfosPartie, BorderLayout.NORTH);
+
         //Panel J1
-        JPanel panelJ1 = new JPanel();
-        panelJ1.setLayout(new BoxLayout(panelJ1, BoxLayout.Y_AXIS));
+        JPanel panelJ1 = new JPanel(new GridLayout(2, 1));
+        panelJ1.setBorder(BorderFactory.createLineBorder(Color.GRAY));
         panelJoueurs.add(panelJ1);
 
-        JTextArea j1pseudo = new JTextArea(jeu.getP1().getPseudo());
+        JLabel j1pseudo = new JLabel(jeu.getP1().getPseudo());
         j1pseudo.setForeground(jeu.getP1().getCouleur());
-        j1pseudo.setOpaque(false);
-        j1pseudo.setEditable(false);
+        j1pseudo.setFont(j1pseudo.getFont().deriveFont(20f));
+        j1pseudo.setHorizontalAlignment(JLabel.CENTER);
         panelJ1.add(j1pseudo);
 
-        j1points = new JTextArea(String.valueOf(jeu.getP1().getPoints()));
-        j1points.setOpaque(false);
-        j1points.setEditable(false);
+        j1points = new JLabel(String.valueOf(jeu.getP1().getPoints()));
+        j1points.setFont(j1points.getFont().deriveFont(24f));
+        j1points.setHorizontalAlignment(JLabel.CENTER);
         panelJ1.add(j1points);
 
         //Panel J2
-        JPanel panelJ2 = new JPanel();
-        panelJ2.setLayout(new BoxLayout(panelJ2, BoxLayout.Y_AXIS));
+        JPanel panelJ2 = new JPanel(new GridLayout(2, 1));
+        panelJ2.setBorder(BorderFactory.createLineBorder(Color.GRAY));
         panelJoueurs.add(panelJ2);
 
-        JTextArea j2pseudo = new JTextArea(jeu.getP2().getPseudo());
+        JLabel j2pseudo = new JLabel(jeu.getP2().getPseudo());
         j2pseudo.setForeground(jeu.getP2().getCouleur());
-        j2pseudo.setOpaque(false);
-        j2pseudo.setEditable(false);
+        j2pseudo.setFont(j2pseudo.getFont().deriveFont(20f));
+        j2pseudo.setHorizontalAlignment(JLabel.CENTER);
         panelJ2.add(j2pseudo);
 
-        j2points = new JTextArea(String.valueOf(jeu.getP2().getPoints()));
-        j2points.setOpaque(false);
-        j2points.setEditable(false);
+        j2points = new JLabel(String.valueOf(jeu.getP2().getPoints()));
+        j2points.setFont(j2points.getFont().deriveFont(24f));
+        j2points.setHorizontalAlignment(JLabel.CENTER);
         panelJ2.add(j2points);
 
         //Panel Options
-        JPanel panelOptions = new JPanel();
+        JPanel panelOptions = new JPanel(new GridLayout(3, 1));
         panelJoueurs.add(panelOptions);
+
+        JButton recommencerPartie = new JButton("Recommencer");
+        panelOptions.add(recommencerPartie);
+        JButton chargerPartie = new JButton("Charger");
+        panelOptions.add(chargerPartie);
+        JButton sauvegarderPartie = new JButton("Sauvegarder");
+        panelOptions.add(sauvegarderPartie);
 
         for(int i=0; i<tailleGrille; i++) {
             for(int j=0; j<tailleGrille; j++) {
@@ -81,16 +92,8 @@ public class VueJeu extends JFrame {
         this.setVisible(true);
     }
 
-    public JTextArea getJ1points() {
-        return j1points;
-    }
-
     public void setJ1points(int _j1points) {
         this.j1points.setText(String.valueOf(_j1points));
-    }
-
-    public JTextArea getJ2points() {
-        return j2points;
     }
 
     public void setJ2points(int _j2points) {

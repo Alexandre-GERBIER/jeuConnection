@@ -85,7 +85,7 @@ public class Grille {
     }
 
     private int caseValue(){
-        return (int) (Math.random()*(this.valMax-1)+1);
+        return (int) (Math.random()*(this.valMax)+1);
     }
 
     private void remplirGrilleAléatoire(){

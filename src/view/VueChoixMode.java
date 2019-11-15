@@ -64,6 +64,7 @@ public class VueChoixMode extends JFrame {
         j1panel.add(panelJ1label);
 
         j1name = new JTextField();
+        j1name.setText("J1");
         j1panel.add(j1name);
 
         //Joueur 2
@@ -75,6 +76,7 @@ public class VueChoixMode extends JFrame {
         j2panel.add(panelJ2label);
 
         j2name = new JTextField();
+        j2name.setText("J2");
         j2panel.add(j2name);
 
         //Paramètres grille
@@ -83,12 +85,14 @@ public class VueChoixMode extends JFrame {
         tailleGrilleText.setEditable(false);
         panelParams.add(tailleGrilleText);
         tailleGrille = new JTextField();
+        tailleGrille.setText("5");
         panelParams.add(tailleGrille);
         JTextArea valeurCasesText = new JTextArea("Valeur max des cases");
         valeurCasesText.setOpaque(false);
         valeurCasesText.setEditable(false);
         panelParams.add(valeurCasesText);
         valeurCases = new JTextField();
+        valeurCases.setText("2");
         panelParams.add(valeurCases);
 
         //Validation
