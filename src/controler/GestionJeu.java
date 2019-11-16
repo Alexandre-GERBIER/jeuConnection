@@ -76,7 +76,12 @@ public class GestionJeu {
             }
             this.tour++;
         } else {
-            JOptionPane.showMessageDialog(new JFrame("Fin"), "C fini");
+            String message = "Égalité";
+            if(this.p1.getPoints() > this.p2.getPoints())
+                message = this.p1.getPseudo() + " a gagné la partie";
+            else if(this.p2.getPoints() > this.p1.getPoints())
+                message = this.p2.getPseudo() + " a gagné la partie";
+            JOptionPane.showMessageDialog(new JFrame("Partie terminée"), message);
         }
     }
 
