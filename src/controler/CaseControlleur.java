@@ -32,6 +32,9 @@ public class CaseControlleur implements ActionListener {
             else
                 this.vue.setJ2points(this.jeu.getJoueurCourant().getPoints());
             this.jeu.nouveauTour();
+            this.vue.getLabelJoueurCourant().setText("Tour de " + this.jeu.getJoueurCourant().getPseudo());
+            this.vue.getLabelJoueurCourant().setForeground(this.jeu.getJoueurCourant().getCouleur());
+            this.vue.getLabelNombreTours().setText(this.jeu.getTour() + " / " + this.jeu.getGrille().getTaille()*this.jeu.getGrille().getTaille());
         }
     }
 }

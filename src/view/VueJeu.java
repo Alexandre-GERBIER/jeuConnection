@@ -9,7 +9,7 @@ import java.awt.*;
 public class VueJeu extends JFrame {
 
     private GestionJeu jeu;
-    private JLabel j1points, j2points;
+    private JLabel j1points, j2points, labelJoueurCourant, labelNombreTours;
 
     public VueJeu(GestionJeu _jeu) {
         this.jeu = _jeu;
@@ -20,18 +20,6 @@ public class VueJeu extends JFrame {
         //Panel central, grid layout de JButton
         int tailleGrille = jeu.getGrille().getTaille();
 
-        ///////////////////////////////////////////
-        ///////////////////////////////////////////
-        ///////////////////////////////////////////
-        ///////////////////////////////////////////
-        ///////////////////////////////////////////
-            //ICI L'ERREUR TAILLE GRILLE = 0 ALORS QUE 3*3
-///////////////////////////////////////////
-        ///////////////////////////////////////////
-        ///////////////////////////////////////////
-        ///////////////////////////////////////////
-        ///////////////////////////////////////////
-
         JPanel panelGrilleBoutons = new JPanel(new GridLayout(tailleGrille, tailleGrille));
         panel.add(panelGrilleBoutons, BorderLayout.CENTER);
 
@@ -40,7 +28,7 @@ public class VueJeu extends JFrame {
         panel.add(panelJoueurs, BorderLayout.SOUTH);
 
         //Panel NORTH, infos partie
-        JPanel panelInfosPartie = new JPanel();
+        JPanel panelInfosPartie = new JPanel(new GridLayout(1, 2));
         panel.add(panelInfosPartie, BorderLayout.NORTH);
 
         //Panel J1
@@ -48,32 +36,32 @@ public class VueJeu extends JFrame {
         panelJ1.setBorder(BorderFactory.createLineBorder(Color.GRAY));
         panelJoueurs.add(panelJ1);
 
-        JLabel j1pseudo = new JLabel(jeu.getP1().getPseudo());
-        j1pseudo.setForeground(jeu.getP1().getCouleur());
+        JLabel j1pseudo = new JLabel(this.jeu.getP1().getPseudo());
+        j1pseudo.setForeground(this.jeu.getP1().getCouleur());
         j1pseudo.setFont(j1pseudo.getFont().deriveFont(20f));
         j1pseudo.setHorizontalAlignment(JLabel.CENTER);
         panelJ1.add(j1pseudo);
 
-        j1points = new JLabel(String.valueOf(jeu.getP1().getPoints()));
-        j1points.setFont(j1points.getFont().deriveFont(24f));
-        j1points.setHorizontalAlignment(JLabel.CENTER);
-        panelJ1.add(j1points);
+        this.j1points = new JLabel(String.valueOf(this.jeu.getP1().getPoints()));
+        this.j1points.setFont(this.j1points.getFont().deriveFont(24f));
+        this.j1points.setHorizontalAlignment(JLabel.CENTER);
+        panelJ1.add(this.j1points);
 
         //Panel J2
         JPanel panelJ2 = new JPanel(new GridLayout(2, 1));
         panelJ2.setBorder(BorderFactory.createLineBorder(Color.GRAY));
         panelJoueurs.add(panelJ2);
 
-        JLabel j2pseudo = new JLabel(jeu.getP2().getPseudo());
-        j2pseudo.setForeground(jeu.getP2().getCouleur());
+        JLabel j2pseudo = new JLabel(this.jeu.getP2().getPseudo());
+        j2pseudo.setForeground(this.jeu.getP2().getCouleur());
         j2pseudo.setFont(j2pseudo.getFont().deriveFont(20f));
         j2pseudo.setHorizontalAlignment(JLabel.CENTER);
         panelJ2.add(j2pseudo);
 
-        j2points = new JLabel(String.valueOf(jeu.getP2().getPoints()));
-        j2points.setFont(j2points.getFont().deriveFont(24f));
-        j2points.setHorizontalAlignment(JLabel.CENTER);
-        panelJ2.add(j2points);
+        this.j2points = new JLabel(String.valueOf(this.jeu.getP2().getPoints()));
+        this.j2points.setFont(this.j2points.getFont().deriveFont(24f));
+        this.j2points.setHorizontalAlignment(JLabel.CENTER);
+        panelJ2.add(this.j2points);
 
         //Panel Options
         JPanel panelOptions = new JPanel(new GridLayout(3, 1));
@@ -81,10 +69,29 @@ public class VueJeu extends JFrame {
 
         JButton recommencerPartie = new JButton("Recommencer");
         panelOptions.add(recommencerPartie);
+
         JButton chargerPartie = new JButton("Charger");
         panelOptions.add(chargerPartie);
+
         JButton sauvegarderPartie = new JButton("Sauvegarder");
         panelOptions.add(sauvegarderPartie);
+
+        //Panel infos partie
+        JPanel panelJoueurCourant = new JPanel();
+        panelJoueurCourant.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+        this.labelJoueurCourant = new JLabel("Tour de " + this.jeu.getJoueurCourant().getPseudo());
+        this.labelJoueurCourant.setForeground(this.jeu.getJoueurCourant().getCouleur());
+        this.labelJoueurCourant.setFont(this.labelJoueurCourant.getFont().deriveFont(20f));
+        panelJoueurCourant.add(labelJoueurCourant);
+
+        JPanel panelInfosTour = new JPanel();
+        panelInfosTour.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+        this.labelNombreTours = new JLabel("Tour " + this.jeu.getTour() + " / " + this.jeu.getGrille().getTaille()*this.jeu.getGrille().getTaille());
+        this.labelNombreTours.setFont(this.labelNombreTours.getFont().deriveFont(20f));
+        panelInfosTour.add(labelNombreTours);
+
+        panelInfosPartie.add(panelJoueurCourant);
+        panelInfosPartie.add(panelInfosTour);
 
         for(int i=0; i<tailleGrille; i++) {
             for(int j=0; j<tailleGrille; j++) {
@@ -112,4 +119,9 @@ public class VueJeu extends JFrame {
     public void setJ2points(int _j2points) {
         this.j2points.setText(String.valueOf(_j2points));
     }
+
+    public JLabel getLabelJoueurCourant() { return this.labelJoueurCourant; }
+
+    public JLabel getLabelNombreTours() { return this.labelNombreTours; }
+
 }

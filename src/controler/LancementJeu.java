@@ -9,7 +9,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 
 public class LancementJeu implements ActionListener {
 
@@ -39,7 +38,7 @@ public class LancementJeu implements ActionListener {
             Joueur p1 = new Joueur(j1name, Color.BLUE);
             Joueur p2 = new Joueur(j2name, Color.RED);
             GestionJeu jeu = new GestionJeu(new Grille(Integer.parseInt(tailleGrille), Integer.parseInt(valeurCases)), p1, p2);
-            VueJeu vueJeu = new VueJeu(jeu);
+            new VueJeu(jeu);
 
             infos.dispose();
         }

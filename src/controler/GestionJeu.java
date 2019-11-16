@@ -65,6 +65,8 @@ public class GestionJeu {
         return this.joueurCourant;
     }
 
+    public int getTour() { return this.tour; }
+
     public void nouveauTour() {
         if (tour < (this.grille.getTaille() * this.grille.getTaille())-1) {
             if (joueurCourant.equals(p1)) {
@@ -72,9 +74,10 @@ public class GestionJeu {
             } else {
                 joueurCourant = p1;
             }
-            this.tour += 1;
+            this.tour++;
         } else {
             JOptionPane.showMessageDialog(new JFrame("Fin"), "C fini");
         }
     }
+
 }
