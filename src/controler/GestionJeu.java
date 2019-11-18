@@ -38,27 +38,15 @@ public class GestionJeu {
     }
 
     public Grille getGrille() {
-        return grille;
-    }
-
-    public void setGrille(Grille _grille) {
-        this.grille = _grille;
+        return this.grille;
     }
 
     public Joueur getP1() {
         return p1;
     }
 
-    public void setP1(Joueur _p1) {
-        this.p1 = _p1;
-    }
-
     public Joueur getP2() {
         return p2;
-    }
-
-    public void setP2(Joueur _p2) {
-        this.p2 = _p2;
     }
 
     public Joueur getJoueurCourant(){
@@ -68,11 +56,11 @@ public class GestionJeu {
     public int getTour() { return this.tour; }
 
     public void nouveauTour() {
-        if (tour < (this.grille.getTaille() * this.grille.getTaille())-1) {
-            if (joueurCourant.equals(p1)) {
-                joueurCourant = p2;
+        if(this.tour < (this.grille.getTaille() * this.grille.getTaille())-1) {
+            if (this.joueurCourant.equals(this.p1)) {
+                this.joueurCourant = this.p2;
             } else {
-                joueurCourant = p1;
+                this.joueurCourant = this.p1;
             }
             this.tour++;
         } else {

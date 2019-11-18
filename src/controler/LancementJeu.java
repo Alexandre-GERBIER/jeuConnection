@@ -39,7 +39,6 @@ public class LancementJeu implements ActionListener {
             Joueur p2 = new Joueur(j2name, Color.RED);
             GestionJeu jeu = new GestionJeu(new Grille(Integer.parseInt(tailleGrille), Integer.parseInt(valeurCases)), p1, p2);
             new VueJeu(jeu);
-
             infos.dispose();
         }
 
