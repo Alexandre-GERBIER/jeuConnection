@@ -1,5 +1,6 @@
 package view;
 
+import controler.ChargerPartieControleur;
 import controler.LancementJeu;
 
 import javax.swing.*;
@@ -99,6 +100,11 @@ public class VueChoixMode extends JFrame {
         JButton validation = new JButton("Valider");
         validation.addActionListener(new LancementJeu(this));
         panelValidation.add(validation);
+
+        //Charger partie
+        JButton chargerPartie = new JButton("Charger une partie");
+        chargerPartie.addActionListener(new ChargerPartieControleur(this));
+        panelValidation.add(chargerPartie);
 
         //Paramètres de la JFrame
         this.setTitle("Choix du mode de jeu");

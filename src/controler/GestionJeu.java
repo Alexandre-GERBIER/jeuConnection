@@ -11,11 +11,16 @@ public class GestionJeu {
     private Joueur p1, p2, joueurCourant;
     private int tour = 0;
 
-    public GestionJeu(Grille _grille, Joueur _p1, Joueur _p2) {
+    public GestionJeu(Grille _grille, Joueur _p1, Joueur _p2, int _tour) {
         this.grille = _grille;
         this.p1 = _p1;
         this.p2 = _p2;
+        this.tour = _tour;
         this.joueurCourant = this.p1;
+    }
+
+    public GestionJeu(Grille _grille, Joueur _p1, Joueur _p2) {
+        this(_grille, _p1, _p2, 0);
     }
 
     //TODO boolean ou exception pour case déjà colorée ?

@@ -11,11 +11,13 @@ public class Grille {
 
     private int taille, valMax;
     private Case[][] grille;
+    private int nbCasesBlanches = 0;
 
     public Grille(int n, int k) {
         this.taille = n;
         this.valMax = k;
         this.grille = new Case[n][n];
+        this.nbCasesBlanches = n*n;
         remplirGrilleAléatoire();
     }
 
@@ -53,6 +55,7 @@ public class Grille {
                     switch(Integer.parseInt(courant)){
                         case 0:
                             this.grille[i][j].setCouleur(Color.WHITE);
+                            this.nbCasesBlanches++;
                             break;
                         case 1:
                             this.grille[i][j].setCouleur(Color.BLUE);
@@ -77,13 +80,7 @@ public class Grille {
         return taille;
     }
 
-    public int getValMax() {
-        return valMax;
-    }
-
-    public Case[][] getGrille() {
-        return grille;
-    }
+    public int getNbCasesBlanches() { return this.nbCasesBlanches; }
 
     private int caseValue(){
         return (int) (Math.random()*(this.valMax)+1);
