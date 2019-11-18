@@ -67,8 +67,9 @@ public class VueJeu extends JFrame {
         JPanel panelOptions = new JPanel(new GridLayout(3, 1));
         panelJoueurs.add(panelOptions);
 
-        JButton recommencerPartie = new JButton("Recommencer");
-        panelOptions.add(recommencerPartie);
+        JButton menuPrincipal = new JButton("Menu principal");
+        menuPrincipal.addActionListener(new RetourMenuControleur(this));
+        panelOptions.add(menuPrincipal);
 
         JButton chargerPartie = new JButton("Charger");
         panelOptions.add(chargerPartie);
