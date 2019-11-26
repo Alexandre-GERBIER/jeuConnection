@@ -24,17 +24,10 @@ public class Adjacence {
     }
 
     /**
-     * supprime un sommet de la liste d'adjacence et renvoie le score qui lui était associé
-     * @param sommet le sommet à supprimer
-     * @return le score associé au sommet supprimé
+     * renvoie le score de la composanteà laquelle la case appartient
+     * @param composante la case d'origine
+     * @return le score de la composante
      */
-    private int supprimer(Case sommet){
-        Sommet sommetAssocie = this.findCase(sommet);
-        int score = sommetAssocie.getScore();
-        this.sommets.remove(sommetAssocie);
-        return score;
-    }
-
     public int getScore(Case composante){
         Sommet sommet = this.sommet(composante);
         return sommet.getScore();
@@ -55,6 +48,11 @@ public class Adjacence {
         return null;
     }
 
+    /**
+     * fonction renvoyant le sommet ayant le plus de fils et l'enlevant du tableau
+     * @param sommets un tableau de sommets
+     * @return le sommet aynt le plus de fils
+     */
     private Sommet getSommetMax(ArrayList<Sommet> sommets){
         Sommet max = sommets.get(0);
         for(Sommet courant : sommets){
@@ -81,17 +79,24 @@ public class Adjacence {
 
         for(int i=1; i<taille; i++){
             Sommet courant = this.getSommetMax(sommets);
-            Case caseOldSommet = courant.getCase();
-            caseOldSommet.setParent(nouveauSommetAssocie);
-            nouveauSommet.ajouterCase(caseOldSommet);
-            LinkedList<Case> filsCourant = courant.getCases();
-            while(!filsCourant.isEmpty()){
-                nouveauSommet.ajouterCase(filsCourant.pop());
+            if(!courant.equals(nouveauSommet)) {
+                Case caseOldSommet = courant.getCase();
+                caseOldSommet.setParent(nouveauSommetAssocie);
+                nouveauSommet.ajouterCase(caseOldSommet);
+                //TODO ajouts fils que lors de la recherche
+                LinkedList<Case> filsCourant = courant.getCases();
+                while (!filsCourant.isEmpty()) {
+                    nouveauSommet.ajouterCase(filsCourant.pop());
+                }
+                this.sommets.remove(courant);
             }
-            this.sommets.remove(courant);
         }
     }
 
+    /**
+     * renvoie le score maximum d'une zone du joueur
+     * @return score
+     */
     public int getScore(){
         return this.score;
     }
@@ -165,9 +170,6 @@ public class Adjacence {
                max = courant.getScore();
            }
         }
-
         this.score = max;
-
-
     }
 }
