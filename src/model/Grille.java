@@ -26,7 +26,7 @@ public class Grille {
 
         try {
             Scanner sc = new Scanner(file);
-            String[] firstLine = sc.nextLine().split("");
+            String[] firstLine = sc.nextLine().split(" ");
             int n = Integer.parseInt(firstLine[0]);
             this.taille = n;
             int k = Integer.parseInt(firstLine[1]);
