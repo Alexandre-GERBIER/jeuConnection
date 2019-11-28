@@ -4,6 +4,9 @@ import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -131,8 +134,8 @@ public class Grille {
         return voisins;
     }
 
-    public void ecrireFichier() throws Exception{
-        String entete =""+this.taille+" "+this.valMax;
+    public void ecrireFichier() throws Exception {
+        String entete = this.taille + "" + this.valMax;
         String valeurs = "";
         String couleurs = "";
 
@@ -157,9 +160,18 @@ public class Grille {
                 valeurs = valeurs.concat("" + courante.getValeur());
             }
         }
-        //TODO ajouter dossier de sauvegardes et tiestamp dans le nom du fichier
+
         String fileContent = entete + valeurs + couleurs;
-        FileWriter fileWriter = new FileWriter("sauv/fichier.txt");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        String[] timeStamp = dateFormat.format(new Date()).split(" ");
+        String[] date = timeStamp[0].split("/");
+        String[] time = timeStamp[1].split(":");
+        String fileName = "save" + date[2] + date[1] + date[0] + "_" + time[0] + time[1] + time[2] + ".txt";
+        File savesDirectory = new File(new File("").getAbsolutePath().concat("\\saves"));
+        if(!savesDirectory.exists()) {
+            savesDirectory.mkdir();
+        }
+        FileWriter fileWriter = new FileWriter(new File(savesDirectory.getName().concat("\\" + fileName)));
         fileWriter.write(fileContent);
         fileWriter.close();
     }
