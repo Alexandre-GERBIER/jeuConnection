@@ -26,7 +26,7 @@ public class Grille {
 
         try {
             Scanner sc = new Scanner(file);
-            String[] firstLine = sc.nextLine().split(" ");
+            String[] firstLine = sc.nextLine().split("");
             int n = Integer.parseInt(firstLine[0]);
             this.taille = n;
             int k = Integer.parseInt(firstLine[1]);
@@ -38,7 +38,7 @@ public class Grille {
             while (i<n) {
                 int j=0;
                 String ligne = sc.nextLine();
-                String[] cases = ligne.split(" ");
+                String[] cases = ligne.split("");
                 for(String courant : cases){
                     this.grille[i][j] = new Case(i, j, Integer.parseInt(courant), Color.WHITE);
                     j++;
@@ -50,7 +50,7 @@ public class Grille {
             while (i<n) {
                 int j=0;
                 String ligne = sc.nextLine();
-                String[] cases = ligne.split(" ");
+                String[] cases = ligne.split("");
                 for(String courant : cases){
                     switch(Integer.parseInt(courant)){
                         case 0:
