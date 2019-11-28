@@ -64,17 +64,15 @@ public class VueJeu extends JFrame {
         panelJ2.add(this.j2points);
 
         //Panel Options
-        JPanel panelOptions = new JPanel(new GridLayout(3, 1));
+        JPanel panelOptions = new JPanel(new GridLayout(2, 1));
         panelJoueurs.add(panelOptions);
 
         JButton menuPrincipal = new JButton("Menu principal");
         menuPrincipal.addActionListener(new RetourMenuControleur(this));
         panelOptions.add(menuPrincipal);
 
-        JButton chargerPartie = new JButton("Charger");
-        panelOptions.add(chargerPartie);
-
         JButton sauvegarderPartie = new JButton("Sauvegarder");
+        sauvegarderPartie.addActionListener(new SauvegarderPartieControleur(this.jeu));
         panelOptions.add(sauvegarderPartie);
 
         //Panel infos partie
