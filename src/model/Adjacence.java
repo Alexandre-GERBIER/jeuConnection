@@ -79,14 +79,17 @@ public class Adjacence {
 
         for(int i=1; i<taille; i++){
             Sommet courant = this.getSommetMax(sommets);
-            Case caseOldSommet = courant.getCase();
-            caseOldSommet.setParent(nouveauSommetAssocie);
-            nouveauSommet.ajouterCase(caseOldSommet);
-            LinkedList<Case> filsCourant = courant.getCases();
-            while(!filsCourant.isEmpty()){
-                nouveauSommet.ajouterCase(filsCourant.pop());
+            if(!courant.equals(nouveauSommet)) {
+                Case caseOldSommet = courant.getCase();
+                caseOldSommet.setParent(nouveauSommetAssocie);
+                nouveauSommet.ajouterCase(caseOldSommet);
+                //TODO ajouts fils que lors de la recherche
+                LinkedList<Case> filsCourant = courant.getCases();
+                while (!filsCourant.isEmpty()) {
+                    nouveauSommet.ajouterCase(filsCourant.pop());
+                }
+                this.sommets.remove(courant);
             }
-            this.sommets.remove(courant);
         }
     }
 
