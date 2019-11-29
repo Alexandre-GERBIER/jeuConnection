@@ -2,6 +2,7 @@ package view;
 
 import controler.ChargerPartieControleur;
 import controler.LancementJeu;
+import controler.ModeJeuPseudoControleur;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,6 +10,7 @@ import java.awt.*;
 public class VueChoixMode extends JFrame {
 
     private JTextField j1name, j2name, tailleGrille, valeurCases;
+    private JRadioButton multiplayer, bot;
 
     public VueChoixMode() {
         //Panel initial
@@ -47,10 +49,12 @@ public class VueChoixMode extends JFrame {
 
         //Boutons de choix du mode de jeu
         ButtonGroup groupeRadioMode = new ButtonGroup();
-        JRadioButton multiplayer = new JRadioButton("Multiplayer");
+        multiplayer = new JRadioButton("Multiplayer");
         multiplayer.setSelected(true);
+        multiplayer.addActionListener(new ModeJeuPseudoControleur(this));
         groupeRadioMode.add(multiplayer);
-        JRadioButton bot = new JRadioButton("Bot");
+        bot = new JRadioButton("Bot");
+        bot.addActionListener(new ModeJeuPseudoControleur(this));
         groupeRadioMode.add(bot);
 
         panelMode.add(multiplayer);
@@ -117,19 +121,21 @@ public class VueChoixMode extends JFrame {
     }
 
     public JTextField getJ1name() {
-        return j1name;
+        return this.j1name;
     }
 
     public JTextField getJ2name() {
-        return j2name;
+        return this.j2name;
     }
 
     public JTextField getTailleGrille() {
-        return tailleGrille;
+        return this.tailleGrille;
     }
 
     public JTextField getValeurCases() {
-        return valeurCases;
+        return this.valeurCases;
     }
+
+    public JRadioButton getBot() { return this.multiplayer; }
 
 }

@@ -40,12 +40,8 @@ public class CaseControlleur implements ActionListener {
             this.vue.getLabelNombreTours().setText(this.jeu.getTour() + " / " + this.jeu.getGrille().getTaille()*this.jeu.getGrille().getTaille());
         } else {
             Joueur possedeCase;
-            /*TODO Si composante = caseAssociee.getParent() on peut cliquer que sur les enfants
-              sinon si composante = caseAssociee on peut cliquer que sur le parent
-            */
             if(this.caseAssociee.getCouleur().equals(Color.BLUE)) {
                 possedeCase = this.jeu.getP1();
-                //LinkedList<Case> composante = possedeCase.getAdjacence().sommet(this.caseAssociee.getParent()).getCases();
                 LinkedList<Case> composante = possedeCase.getAdjacence().getCasesComposante(this.caseAssociee);
                 for(Case c : composante) {
                     JButton jButtonAssocie = this.vue.getJbuttonGrid()[c.getX()][c.getY()];
@@ -54,7 +50,6 @@ public class CaseControlleur implements ActionListener {
             } else {
                 possedeCase = this.jeu.getP2();
                 LinkedList<Case> composante = possedeCase.getAdjacence().getCasesComposante(this.caseAssociee);
-                //LinkedList<Case> composante = possedeCase.getAdjacence().sommet(this.caseAssociee.getParent()).getCases();
                 for(Case c : composante) {
                     JButton jButtonAssocie = this.vue.getJbuttonGrid()[c.getX()][c.getY()];
                     jButtonAssocie.setBackground(Color.BLACK);
@@ -63,7 +58,6 @@ public class CaseControlleur implements ActionListener {
             int result = JOptionPane.showConfirmDialog(new JFrame("Score zone"), "score : " + possedeCase.scoreGroupe(this.caseAssociee));
             if(result == JOptionPane.OK_OPTION) {
                 if(possedeCase.equals(this.jeu.getP1())) {
-                    //LinkedList<Case> composante = possedeCase.getAdjacence().findCase(this.caseAssociee.getParent()).getCases();
                     LinkedList<Case> composante = possedeCase.getAdjacence().getCasesComposante(this.caseAssociee);
                     for(Case c : composante) {
                         JButton jButtonAssocie = this.vue.getJbuttonGrid()[c.getX()][c.getY()];
@@ -71,7 +65,6 @@ public class CaseControlleur implements ActionListener {
                     }
                 } else {
                     LinkedList<Case> composante = possedeCase.getAdjacence().getCasesComposante(this.caseAssociee);
-                    //LinkedList<Case> composante = possedeCase.getAdjacence().findCase(this.caseAssociee.getParent()).getCases();
                     for(Case c : composante) {
                         JButton jButtonAssocie = this.vue.getJbuttonGrid()[c.getX()][c.getY()];
                         jButtonAssocie.setBackground(Color.RED);

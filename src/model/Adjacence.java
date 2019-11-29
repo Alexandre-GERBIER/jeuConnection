@@ -56,8 +56,6 @@ public class Adjacence {
      * @return
      */
     public Sommet findCase(Case recherche){
-        //TODO Si recherche n'a pas de parent, retourner le Sommet correspondant à recherche
-        //if(recherche.getParent() == null) return this.sommet(recherche); ICI BOUCLE INFINIE
         for(int i=0;i<this.sommets.size();i++){
             Sommet current = this.sommets.get(i);
             if(current.getCase().equals(recherche) ){
