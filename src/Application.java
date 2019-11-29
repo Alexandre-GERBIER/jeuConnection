@@ -1,5 +1,4 @@
-import view.*;
-import model.*;
+import view.VueChoixMode;
 
 public class Application {
 
