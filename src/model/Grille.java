@@ -161,17 +161,18 @@ public class Grille {
             }
         }
 
+        //TODO pb slash pour arborescence selon windows ou linux
         String fileContent = entete + valeurs + couleurs;
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         String[] timeStamp = dateFormat.format(new Date()).split(" ");
         String[] date = timeStamp[0].split("/");
         String[] time = timeStamp[1].split(":");
         String fileName = "save" + date[2] + date[1] + date[0] + "_" + time[0] + time[1] + time[2] + ".txt";
-        File savesDirectory = new File(new File("").getAbsolutePath().concat("\\saves"));
+        File savesDirectory = new File(new File("").getAbsolutePath().concat("//saves"));
         if(!savesDirectory.exists()) {
             savesDirectory.mkdir();
         }
-        FileWriter fileWriter = new FileWriter(new File(savesDirectory.getName().concat("\\" + fileName)));
+        FileWriter fileWriter = new FileWriter(new File(savesDirectory.getName().concat("//" + fileName)));
         fileWriter.write(fileContent);
         fileWriter.close();
     }
