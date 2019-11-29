@@ -7,6 +7,10 @@ public class Adjacence {
     private ArrayList<Sommet> sommets;
     private int score;
 
+    //TODO pb quand lecture valeur adjacence depuis sommet (1ere case) , pb depuis modif pour maj sommet lors de fusion dans recherche et non à l'ajout
+    //TODO complexité
+
+
     public Adjacence(){
         this.sommets = new ArrayList<Sommet>();
     }
@@ -23,13 +27,26 @@ public class Adjacence {
         }
     }
 
+
+    public void updateSommet(Sommet origine){
+        Sommet nouveauSommet = this.sommet(origine.getCase().getParent());
+        LinkedList<Case> filsCourant = origine.getCases();
+        while (!filsCourant.isEmpty()) {
+            nouveauSommet.ajouterCase(filsCourant.pop());
+        }
+        this.sommets.remove(origine);
+    }
+
     /**
-     * renvoie le score de la composanteà laquelle la case appartient
+     * renvoie le score de la composante à laquelle la case appartient et si la case n'est pas réliée au sommet du groupe, mets à jour le lien de toutes les cases
      * @param composante la case d'origine
      * @return le score de la composante
      */
     public int getScore(Case composante){
         Sommet sommet = this.sommet(composante);
+        if((!sommet.getCase().equals(composante.getParent())) && composante.getParent() != null){
+            this.updateSommet(this.sommet(composante.getParent()));
+        }
         return sommet.getScore();
     }
 
@@ -83,12 +100,6 @@ public class Adjacence {
                 Case caseOldSommet = courant.getCase();
                 caseOldSommet.setParent(nouveauSommetAssocie);
                 nouveauSommet.ajouterCase(caseOldSommet);
-                //TODO ajouts fils que lors de la recherche
-                LinkedList<Case> filsCourant = courant.getCases();
-                while (!filsCourant.isEmpty()) {
-                    nouveauSommet.ajouterCase(filsCourant.pop());
-                }
-                this.sommets.remove(courant);
             }
         }
     }

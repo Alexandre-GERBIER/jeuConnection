@@ -157,7 +157,7 @@ public class Grille {
                 valeurs = valeurs.concat("" + courante.getValeur());
             }
         }
-        //TODO ajouter dossier de sauvegardes et tiestamp dans le nom du fichier
+        //TODO ajouter dossier de sauvegardes et timestamp dans le nom du fichier
         String fileContent = entete + valeurs + couleurs;
         FileWriter fileWriter = new FileWriter("sauv/fichier.txt");
         fileWriter.write(fileContent);
