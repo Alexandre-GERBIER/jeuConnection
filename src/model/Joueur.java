@@ -36,7 +36,7 @@ public class Joueur {
     }
 
     public int scoreGroupe(Case composante){
-        return this.adjacence.getScore(composante);
+        return this.adjacence.afficherScore(composante);
     }
 
     public void ajouterCase(Case newCase, LinkedList<Case> voisins){

@@ -42,7 +42,7 @@ public class Adjacence {
      * @param composante la case d'origine
      * @return le score de la composante
      */
-    public int getScore(Case composante){
+    public int afficherScore(Case composante){
         Sommet sommet = this.sommet(composante);
         if((!sommet.getCase().equals(composante.getParent())) && composante.getParent() != null){
             this.updateSommet(this.sommet(composante.getParent()));
@@ -55,7 +55,7 @@ public class Adjacence {
      * @param recherche
      * @return
      */
-    private Sommet findCase(Case recherche){
+    public Sommet findCase(Case recherche){
         for(int i=0;i<this.sommets.size();i++){
             Sommet current = this.sommets.get(i);
             if(current.getCase().equals(recherche) ){

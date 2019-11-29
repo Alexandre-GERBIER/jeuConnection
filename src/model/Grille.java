@@ -25,6 +25,28 @@ public class Grille {
     }
 
     public Grille(String fichier, Joueur j1, Joueur j2) {
+        this.remplirGrilleFichier(fichier,  j1,  j2);
+    }
+
+    public int getTaille() {
+        return taille;
+    }
+
+    public int getNbCasesBlanches() { return this.nbCasesBlanches; }
+
+    private int caseValue(){
+        return (int) (Math.random()*(this.valMax)+1);
+    }
+
+    private void remplirGrilleAléatoire(){
+        for(int i=0; i<this.taille; i++){
+            for(int j=0; j<this.taille; j++){
+                this.grille[i][j] = new Case(i,j,caseValue(),Color.WHITE);
+            }
+        }
+    }
+
+    private void remplirGrilleFichier(String fichier, Joueur j1, Joueur j2){
         File file = new File(fichier);
 
         try {
@@ -62,11 +84,11 @@ public class Grille {
                             break;
                         case 1:
                             this.grille[i][j].setCouleur(Color.BLUE);
-                            j1.ajouterCase(this.grille[i][j], this.getVoisinCouleur(this.grille[i][j]));
+                            j1.ajouterCase(this.grille[i][j], this.relierComposantes(this.grille[i][j]));
                             break;
                         case 2:
                             this.grille[i][j].setCouleur(Color.RED);
-                            j2.ajouterCase(this.grille[i][j], this.getVoisinCouleur(this.grille[i][j]));
+                            j2.ajouterCase(this.grille[i][j], this.relierComposantes(this.grille[i][j]));
                             break;
                     }
                     j++;
@@ -79,29 +101,11 @@ public class Grille {
         }
     }
 
-    public int getTaille() {
-        return taille;
-    }
-
-    public int getNbCasesBlanches() { return this.nbCasesBlanches; }
-
-    private int caseValue(){
-        return (int) (Math.random()*(this.valMax)+1);
-    }
-
-    private void remplirGrilleAléatoire(){
-        for(int i=0; i<this.taille; i++){
-            for(int j=0; j<this.taille; j++){
-                this.grille[i][j] = new Case(i,j,caseValue(),Color.WHITE);
-            }
-        }
-    }
-
     public Case get(int x, int y){
         return grille[x][y];
     }
 
-    public LinkedList<Case> getVoisinCouleur(Case origine){
+    public LinkedList<Case> relierComposantes(Case origine){
         LinkedList<Case> voisins = new LinkedList<Case>();
         int xOrigine = origine.getX();
         int yOrigine = origine.getY();

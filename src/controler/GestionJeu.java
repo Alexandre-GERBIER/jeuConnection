@@ -23,7 +23,6 @@ public class GestionJeu {
         this(_grille, _p1, _p2, 0);
     }
 
-    //TODO boolean ou exception pour case déjà colorée ?
     public boolean colorerCase(Case caseAColorer, Joueur joueur) {
         if (caseAColorer.getCouleur() != Color.white) {
             Joueur possedeCase ;
@@ -36,7 +35,7 @@ public class GestionJeu {
             return false;
         } else {
             caseAColorer.setCouleur(joueur.getCouleur());
-            joueur.ajouterCase(caseAColorer, this.grille.getVoisinCouleur(caseAColorer));
+            joueur.ajouterCase(caseAColorer, this.grille.relierComposantes(caseAColorer));
             return true;
         }
 
