@@ -13,6 +13,7 @@ public class Sommet {
         this.score = newSommet.getValeur();
         this.taille = 1;
         this.cases = new LinkedList<Case>();
+        this.cases.add(newSommet);
     }
 
     public void ajouterCase(Case newCase){

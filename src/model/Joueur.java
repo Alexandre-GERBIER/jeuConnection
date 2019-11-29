@@ -43,4 +43,6 @@ public class Joueur {
         this.adjacence.add(newCase,voisins);
     }
 
+    public Adjacence getAdjacence() { return adjacence; }
+
 }

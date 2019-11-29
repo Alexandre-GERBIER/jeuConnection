@@ -1,12 +1,15 @@
 package controler;
 
+import model.Adjacence;
 import model.Case;
+import model.Joueur;
 import view.VueJeu;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.LinkedList;
 
 public class CaseControlleur implements ActionListener {
 
@@ -26,7 +29,7 @@ public class CaseControlleur implements ActionListener {
     public void actionPerformed(ActionEvent actionEvent) {
         boolean valide = this.jeu.colorerCase(this.caseAssociee,jeu.getJoueurCourant());
         this.boutonAssocie.setBackground(this.caseAssociee.getCouleur());
-        if(valide){
+        if(valide) {
             if(this.jeu.getJoueurCourant().getCouleur() == Color.BLUE)
                 this.vue.setJ1points(this.jeu.getJoueurCourant().getPoints());
             else
@@ -35,6 +38,42 @@ public class CaseControlleur implements ActionListener {
             this.vue.getLabelJoueurCourant().setText("Tour de " + this.jeu.getJoueurCourant().getPseudo());
             this.vue.getLabelJoueurCourant().setForeground(this.jeu.getJoueurCourant().getCouleur());
             this.vue.getLabelNombreTours().setText(this.jeu.getTour() + " / " + this.jeu.getGrille().getTaille()*this.jeu.getGrille().getTaille());
+        } else {
+            Joueur possedeCase;
+            /*TODO Si composante = caseAssociee.getParent() on peut cliquer que sur les enfants
+              sinon si composante = caseAssociee on peut cliquer que sur le parent
+            */
+            if(this.caseAssociee.getCouleur().equals(Color.BLUE)) {
+                possedeCase = this.jeu.getP1();
+                LinkedList<Case> composante = possedeCase.getAdjacence().findCase(this.caseAssociee.getParent()).getCases();
+                for(Case c : composante) {
+                    JButton jButtonAssocie = this.vue.getJbuttonGrid()[c.getX()][c.getY()];
+                    jButtonAssocie.setBackground(Color.BLACK);
+                }
+            } else {
+                possedeCase = this.jeu.getP2();
+                LinkedList<Case> composante = possedeCase.getAdjacence().findCase(this.caseAssociee.getParent()).getCases();
+                for(Case c : composante) {
+                    JButton jButtonAssocie = this.vue.getJbuttonGrid()[c.getX()][c.getY()];
+                    jButtonAssocie.setBackground(Color.BLACK);
+                }
+            }
+            int result = JOptionPane.showConfirmDialog(new JFrame("Score zone"), "score : " + possedeCase.scoreGroupe(this.caseAssociee));
+            if(result == JOptionPane.OK_OPTION) {
+                if(possedeCase.equals(this.jeu.getP1())) {
+                    LinkedList<Case> composante = possedeCase.getAdjacence().findCase(this.caseAssociee.getParent()).getCases();
+                    for(Case c : composante) {
+                        JButton jButtonAssocie = this.vue.getJbuttonGrid()[c.getX()][c.getY()];
+                        jButtonAssocie.setBackground(Color.BLUE);
+                    }
+                } else {
+                    LinkedList<Case> composante = possedeCase.getAdjacence().findCase(this.caseAssociee.getParent()).getCases();
+                    for(Case c : composante) {
+                        JButton jButtonAssocie = this.vue.getJbuttonGrid()[c.getX()][c.getY()];
+                        jButtonAssocie.setBackground(Color.RED);
+                    }
+                }
+            }
         }
     }
 }

@@ -10,9 +10,11 @@ public class VueJeu extends JFrame {
 
     private GestionJeu jeu;
     private JLabel j1points, j2points, labelJoueurCourant, labelNombreTours;
+    private JButton[][] jbuttonGrid;
 
     public VueJeu(GestionJeu _jeu) {
         this.jeu = _jeu;
+        this.jbuttonGrid = new JButton[this.jeu.getGrille().getTaille()][this.jeu.getGrille().getTaille()];
 
         //Panel initial
         JPanel panel = new JPanel(new BorderLayout());
@@ -95,10 +97,10 @@ public class VueJeu extends JFrame {
         for(int i=0; i<tailleGrille; i++) {
             for(int j=0; j<tailleGrille; j++) {
                 Case caseActuelle = jeu.getGrille().get(i, j);
-                JButton bouton = new JButton(String.valueOf(caseActuelle.getValeur()));
-                bouton.addActionListener(new CaseControlleur(caseActuelle, jeu, bouton, this));
-                bouton.setBackground(caseActuelle.getCouleur());
-                panelGrilleBoutons.add(bouton);
+                jbuttonGrid[i][j] = new JButton(String.valueOf(caseActuelle.getValeur()));
+                jbuttonGrid[i][j].addActionListener(new CaseControlleur(caseActuelle, jeu, jbuttonGrid[i][j], this));
+                jbuttonGrid[i][j].setBackground(caseActuelle.getCouleur());
+                panelGrilleBoutons.add(jbuttonGrid[i][j]);
             }
         }
 
@@ -118,6 +120,8 @@ public class VueJeu extends JFrame {
     public void setJ2points(int _j2points) {
         this.j2points.setText(String.valueOf(_j2points));
     }
+
+    public JButton[][] getJbuttonGrid() { return this.jbuttonGrid; }
 
     public JLabel getLabelJoueurCourant() { return this.labelJoueurCourant; }
 
