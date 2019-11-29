@@ -185,4 +185,9 @@ public class Adjacence {
         }
         this.score = max;
     }
+
+    public LinkedList<Case> getCasesComposante(Case origine){
+        Sommet sommetOrigine = this.sommet(origine);
+        return sommetOrigine.getCases();
+    }
 }
