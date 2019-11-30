@@ -105,6 +105,39 @@ public class Grille {
         return grille[x][y];
     }
 
+    public LinkedList<Case> voisinsDispo(Case origine){
+        LinkedList<Case> voisins = new LinkedList<Case>();
+        int xOrigine = origine.getX();
+        int yOrigine = origine.getY();
+
+        if(yOrigine-1 >= 0) {
+            Case dessus = this.grille[xOrigine][yOrigine - 1];
+            if(dessus.getCouleur() == Color.WHITE){
+                voisins.add(dessus);
+            }
+        }
+        if(yOrigine+1 < this.taille) {
+            Case dessous = this.grille[xOrigine][yOrigine + 1];
+            if(dessous.getCouleur() == Color.WHITE){
+                voisins.add(dessous);
+            }
+        }
+        if(xOrigine+1 < this.taille) {
+            Case droite = this.grille[xOrigine + 1][yOrigine];
+            if(droite.getCouleur() == Color.WHITE){
+                voisins.add(droite);
+            }
+        }
+        if(xOrigine-1 >=0 ) {
+            Case gauche = this.grille[xOrigine-1][yOrigine];
+            if(gauche.getCouleur() == Color.WHITE){
+                voisins.add(gauche);
+            }
+        }
+
+        return voisins;
+    }
+
     public LinkedList<Case> relierComposantes(Case origine){
         LinkedList<Case> voisins = new LinkedList<Case>();
         int xOrigine = origine.getX();

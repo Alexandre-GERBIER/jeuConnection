@@ -12,28 +12,51 @@ public class Bot extends Joueur {
     Grille grille;
     int[][] previsions;
     int taille;
+    LinkedList<Case> casesJouee;
 
     public Bot(String _pseudo, Color _couleur, Grille _grille) {
         super(_pseudo, _couleur);
+        this.casesJouee = new LinkedList<Case>();
         this.grille = _grille;
         this.taille = this.grille.getTaille();
         this.initGrilleJeu();
     }
 
-    public void jouer(int tourN){
+    public int[] jouer(int tourN){
+        int[] coordAjouer = new int[2];
+        int xMax = 0, yMax = 0, valMax = 0;
         if(tourN<2){
             int milieu = taille/2;
-            int xMax, yMax, valMax = 0;
-            for(int i=milieu-2; i<milieu+2; i++){
-                for(int j=milieu-2; j<milieu+2; j++){
-                    if(this.previsions[i][j]>valMax){
+
+            for(int i=milieu-2; i<milieu+2; i++) {
+                for (int j = milieu - 2; j < milieu + 2; j++) {
+                    if (this.previsions[i][j] > valMax) {
                         xMax = i;
                         yMax = j;
+                        valMax = this.previsions[i][j];
                     }
                 }
             }
-            //todo jouer la case de coord xMax, yMax
+
+        } else {
+            for (Case courant: this.casesJouee) {
+                LinkedList<Case> voisinsCourant = this.grille.voisinsDispo(courant);
+                for(Case voisinCourant : voisinsCourant){
+                    int xCourant = voisinCourant.getX();
+                    int yCourant = voisinCourant.getY();
+                    if(this.previsions[xCourant][yCourant]>valMax){
+                        xMax = xCourant;
+                        yMax = yCourant;
+                        valMax = this.previsions[xCourant][yCourant];
+                    }
+                }
+            }
+
         }
+        coordAjouer[0] = xMax;
+        coordAjouer[1] = yMax;
+        this.casesJouee.add(this.grille.get(xMax,yMax));
+        return coordAjouer;
     }
 
     private void initGrilleJeu(){
@@ -66,7 +89,6 @@ public class Bot extends Joueur {
             Case gauche = this.grille.get(xOrigine-1,yOrigine);
             somme += gauche.getValeur();
         }
-
-        return somme;
+        return somme+origine.getValeur();
     }
 }
