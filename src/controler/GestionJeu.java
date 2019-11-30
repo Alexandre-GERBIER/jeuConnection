@@ -70,4 +70,25 @@ public class GestionJeu {
         }
     }
 
+    public Adjacence getAdjacenceCase(Case origine){
+        if(origine.getCouleur().equals(Color.BLUE)){
+            return p1.getAdjacence();
+        }
+        if(origine.getCouleur().equals(Color.RED)){
+            return p2.getAdjacence();
+        } else{
+            return null;
+        }
+    }
+
+    public boolean existeCheminCases(Case case1, Case case2){
+        if(!case1.getCouleur().equals(case2.getCouleur())){
+            return false;
+        }
+        Adjacence adj = this.getAdjacenceCase(case1);
+        Sommet sommet1 = adj.getSommetAssocie(case1);
+        Sommet sommet2 = adj.getSommetAssocie(case2);
+        return sommet1.equals(sommet2);
+    }
+
 }

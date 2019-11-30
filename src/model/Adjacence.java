@@ -19,17 +19,17 @@ public class Adjacence {
      * @param origine case
      * @return le sommet associé à cette case
      */
-    public Sommet sommet(Case origine){
+    public Sommet getSommetAssocie(Case origine){
         if(origine.getParent() == null){
             return this.findCase(origine);
         } else {
-            return this.sommet(origine.getParent());
+            return this.getSommetAssocie(origine.getParent());
         }
     }
 
 
     public void updateSommet(Sommet origine){
-        Sommet nouveauSommet = this.sommet(origine.getCase().getParent());
+        Sommet nouveauSommet = this.getSommetAssocie(origine.getCase().getParent());
         LinkedList<Case> filsCourant = origine.getCases();
         while (!filsCourant.isEmpty()) {
             nouveauSommet.ajouterCase(filsCourant.pop());
@@ -43,9 +43,9 @@ public class Adjacence {
      * @return le score de la composante
      */
     public int afficherScore(Case composante){
-        Sommet sommet = this.sommet(composante);
+        Sommet sommet = this.getSommetAssocie(composante);
         if((!sommet.getCase().equals(composante.getParent())) && composante.getParent() != null){
-            this.updateSommet(this.sommet(composante.getParent()));
+            this.updateSommet(this.getSommetAssocie(composante.getParent()));
         }
         return sommet.getScore();
     }
@@ -127,7 +127,7 @@ public class Adjacence {
 
             case 1:
                 Case voisin = voisinColore.getFirst();
-                Sommet sommetVoisin = this.sommet(voisin);
+                Sommet sommetVoisin = this.getSommetAssocie(voisin);
                 caseAjout.setParent(sommetVoisin.getCase());
                 sommetVoisin.ajouterCase(caseAjout);
 
@@ -136,10 +136,10 @@ public class Adjacence {
             case 2:
 
                 voisinSommet = voisinColore.getFirst();
-                sommets.add(this.sommet(voisinSommet));
+                sommets.add(this.getSommetAssocie(voisinSommet));
 
                 Case autreVoisin = voisinColore.getLast();
-                sommets.add(this.sommet(autreVoisin));
+                sommets.add(this.getSommetAssocie(autreVoisin));
 
                 this.fusion(sommets, caseAjout,2);
                 break;
@@ -147,13 +147,13 @@ public class Adjacence {
             case 3 :
 
                 voisinSommet = voisinColore.getFirst();
-                sommets.add(this.sommet(voisinSommet));
+                sommets.add(this.getSommetAssocie(voisinSommet));
 
                 autreVoisin1 = voisinColore.get(1);
-                sommets.add(this.sommet(autreVoisin1));;
+                sommets.add(this.getSommetAssocie(autreVoisin1));;
 
                 autreVoisin2 = voisinColore.get(2);
-                sommets.add(this.sommet(autreVoisin2));
+                sommets.add(this.getSommetAssocie(autreVoisin2));
 
                 this.fusion(sommets,caseAjout,3);
                 break;
@@ -161,16 +161,16 @@ public class Adjacence {
             case 4:
 
                 voisinSommet = voisinColore.getFirst();
-                sommets.add(this.sommet(voisinSommet));
+                sommets.add(this.getSommetAssocie(voisinSommet));
 
                 autreVoisin1 = voisinColore.get(1);
-                sommets.add(this.sommet(autreVoisin1));
+                sommets.add(this.getSommetAssocie(autreVoisin1));
 
                 autreVoisin2 = voisinColore.get(2);
-                sommets.add(this.sommet(autreVoisin2));
+                sommets.add(this.getSommetAssocie(autreVoisin2));
 
                 Case autreVoisin3 = voisinColore.get(3);
-                sommets.add(this.sommet(autreVoisin3));
+                sommets.add(this.getSommetAssocie(autreVoisin3));
 
                 this.fusion(sommets,caseAjout,4);
         }
@@ -184,8 +184,14 @@ public class Adjacence {
         this.score = max;
     }
 
+    /**
+     * renvoie l'ensemble des case de la composante contenat la case passée en paramètre
+     * @param origine une case dont on veut connaître l'ensemble des case de sa composante
+     * @return une liste des cases de la composante
+     */
     public LinkedList<Case> getCasesComposante(Case origine){
-        Sommet sommetOrigine = this.sommet(origine);
+        Sommet sommetOrigine = this.getSommetAssocie(origine);
         return sommetOrigine.getCases();
     }
+
 }
