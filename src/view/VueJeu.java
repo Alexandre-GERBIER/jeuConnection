@@ -55,6 +55,7 @@ public class VueJeu extends JFrame {
         panelJoueurs.add(panelJ2);
 
         JLabel j2pseudo;
+        //Joueur 2 ou bot
         if(this.jeu.isMultiplayer()) {
             j2pseudo = new JLabel(this.jeu.getP2().getPseudo());
             j2pseudo.setForeground(this.jeu.getP2().getCouleur());
