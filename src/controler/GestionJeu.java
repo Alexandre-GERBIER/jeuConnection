@@ -10,6 +10,7 @@ public class GestionJeu {
     private Grille grille;
     private Joueur p1, p2, joueurCourant;
     private int tour = 0;
+    private Bot bot;
 
     public GestionJeu(Grille _grille, Joueur _p1, Joueur _p2, int _tour) {
         this.grille = _grille;
@@ -21,6 +22,11 @@ public class GestionJeu {
 
     public GestionJeu(Grille _grille, Joueur _p1, Joueur _p2) {
         this(_grille, _p1, _p2, 0);
+    }
+
+    public GestionJeu(Grille _grille, Joueur _p1, Bot _p2, boolean bot) {
+        this(_grille, _p1, _p2, 0);
+        this.bot = _p2;
     }
 
     public boolean colorerCase(Case caseAColorer, Joueur joueur) {

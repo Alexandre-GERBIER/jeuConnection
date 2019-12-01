@@ -38,8 +38,8 @@ public class LancementJeu implements ActionListener {
         } else if(bot){
             Joueur p1 = new Joueur(j1name, Color.BLUE);
             Grille grille = new Grille(Integer.parseInt(tailleGrille), Integer.parseInt(valeurCases));
-            Joueur p2 = new Bot(j2name, Color.RED, grille);
-            GestionJeu jeu = new GestionJeu(grille, p1, p2);
+            Bot p2 = new Bot(j2name, Color.RED, grille);
+            GestionJeu jeu = new GestionJeu(grille, p1, p2, true);
             new VueJeu(jeu);
             infos.dispose();
         } else {
