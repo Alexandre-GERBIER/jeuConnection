@@ -1,8 +1,4 @@
-package controler;
-
-import model.Case;
-import model.Grille;
-import model.Joueur;
+package model;
 
 import java.awt.*;
 import java.util.LinkedList;
