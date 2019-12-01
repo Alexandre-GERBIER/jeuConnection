@@ -7,10 +7,6 @@ public class Adjacence {
     private ArrayList<Sommet> sommets;
     private int score;
 
-    //TODO pb quand lecture valeur adjacence depuis sommet (1ere case) , pb depuis modif pour maj sommet lors de fusion dans recherche et non à l'ajout
-    //TODO complexité
-
-
     public Adjacence(){
         this.sommets = new ArrayList<Sommet>();
     }
