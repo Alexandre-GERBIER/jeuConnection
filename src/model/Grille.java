@@ -101,6 +101,10 @@ public class Grille {
         }
     }
 
+    public boolean libre(int x, int y){
+        return this.grille[x][y].getCouleur() == Color.white;
+    }
+
     public Case get(int x, int y){
         return grille[x][y];
     }

@@ -19,6 +19,7 @@ public class Bot extends Joueur {
     }
 
     public int[] jouer(int tourN){
+        boolean moov_valid = false;
         int[] coordAjouer = new int[2];
         int xMax = 0, yMax = 0, valMax = 0;
         if(tourN<2){
@@ -44,6 +45,18 @@ public class Bot extends Joueur {
                         xMax = xCourant;
                         yMax = yCourant;
                         valMax = this.previsions[xCourant][yCourant];
+                        moov_valid = true;
+                    }
+                }
+            }
+            if(!moov_valid){
+                for(int i=0; i<this.taille; i++) {
+                    for (int j = 0; j < this.taille; j++) {
+                        if (this.previsions[i][j] > valMax && this.grille.libre(i,j)) {
+                            xMax = i;
+                            yMax = j;
+                            valMax = this.previsions[i][j];
+                        }
                     }
                 }
             }
