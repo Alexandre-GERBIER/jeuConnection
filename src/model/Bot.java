@@ -18,6 +18,11 @@ public class Bot extends Joueur {
         this.initGrilleJeu();
     }
 
+    /**
+     * lance le tour d'un bot
+     * @param tourN le numéro du tour dans la partie
+     * @return un tableau contenant les coordonées de la case que le bot joue
+     */
     public int[] jouer(int tourN){
         boolean moov_valid = false;
         int[] coordAjouer = new int[2];
@@ -68,6 +73,10 @@ public class Bot extends Joueur {
         return coordAjouer;
     }
 
+    /**
+     * rempli la grille de calcul des valeurs de chaque case,
+     * la valeur d'une ase représente l'interêt de la jouer, calculer par la somme de sa valeur et de la valeur de ses voisins
+     */
     private void initGrilleJeu(){
         this.previsions = new int[this.taille][this.taille];
         for(int i=0; i<this.taille; i++){
@@ -77,6 +86,11 @@ public class Bot extends Joueur {
         }
     }
 
+    /**
+     * renvoie la somme des valeurs des voisins d'une case passée en paramètre et de sa valeur
+     * @param origine la case dont on veut connnaitre la somme
+     * @return la somme des cases accessible depuis la case passée en paramètre
+     */
     private int sommeVoisins(Case origine){
         int somme = 0;
         int xOrigine = origine.getX();

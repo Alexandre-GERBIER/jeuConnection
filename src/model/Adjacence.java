@@ -28,6 +28,10 @@ public class Adjacence {
     }
 
 
+    /**
+     * met a jour les cases appartenant aux sommet en paramètre pour les lier au sommet qui lui est associé
+     * @param origine ancien sommet
+     */
     public void updateSommet(Sommet origine){
         Sommet nouveauSommet = this.getSommetAssocie(origine.getCase().getParent());
         LinkedList<Case> filsCourant = origine.getCases();

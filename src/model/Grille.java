@@ -16,6 +16,7 @@ public class Grille {
     private Case[][] grille;
     private int nbCasesBlanches = 0;
 
+
     public Grille(int n, int k) {
         this.taille = n;
         this.valMax = k;
@@ -24,20 +25,41 @@ public class Grille {
         remplirGrilleAléatoire();
     }
 
+    /**
+     * constructeur avec un fichier contenant une partie sauvegardée en parametre
+     * @param fichier fichier de sauvegarde d'une partie
+     * @param j1 joueur 1
+     * @param j2 joueur 2
+     */
     public Grille(String fichier, Joueur j1, Joueur j2) {
         this.remplirGrilleFichier(fichier,  j1,  j2);
     }
 
+    /**
+     * renvoe la taille de la grille
+     * @return la taille de la grille
+     */
     public int getTaille() {
         return taille;
     }
 
+    /**
+     * renvoie le nombre de cases libres
+     * @return le nombre de cases blanches(libres)
+     */
     public int getNbCasesBlanches() { return this.nbCasesBlanches; }
 
+    /**
+     * renvoie une valeur aléatoire inférieure ou égale au max sspécifié lors du lancement de la partie,
+     * cette valeur sera attribuée à une case
+     */
     private int caseValue(){
         return (int) (Math.random()*(this.valMax)+1);
     }
 
+    /**
+     * rempli la grille de cases non colorées(blanche) après leur avoir attribué une valeur aléatoire
+     */
     private void remplirGrilleAléatoire(){
         for(int i=0; i<this.taille; i++){
             for(int j=0; j<this.taille; j++){
@@ -46,6 +68,12 @@ public class Grille {
         }
     }
 
+    /**
+     * rempli la grille avec les valeurs du fichier de sauvegarde spécifié
+     * @param fichier fichier de sauvegarde où se trouvent les paramètres du jeu
+     * @param j1 joueur 11
+     * @param j2 joueur 2
+     */
     private void remplirGrilleFichier(String fichier, Joueur j1, Joueur j2){
         File file = new File(fichier);
 
@@ -101,14 +129,31 @@ public class Grille {
         }
     }
 
+    /**
+     * renvoie un booléen exprimant si la cae est libre (pas colorée par une joueur
+     * @param x coordonnée x de la case
+     * @param y coordonnée y de la case
+     * @return la case peut être jouée
+     */
     public boolean libre(int x, int y){
         return this.grille[x][y].getCouleur() == Color.white;
     }
 
+    /**
+     * renvoie la case se trouvant aux coordonnées spécifiées
+     * @param x coordonnée x de la case
+     * @param y coordonnée y de la case
+     * @return la case demandée
+     */
     public Case get(int x, int y){
-        return grille[x][y];
+        return this.grille[x][y];
     }
 
+    /**
+     * renvoie une liste des voisins libre d'une case
+     * @param origine la case dont on veut les voisins libres
+     * @return la liste de voisins libre
+     */
     public LinkedList<Case> voisinsDispo(Case origine){
         LinkedList<Case> voisins = new LinkedList<Case>();
         int xOrigine = origine.getX();
@@ -142,6 +187,11 @@ public class Grille {
         return voisins;
     }
 
+    /**
+     * renvoie la liste des voisins de la même couleur quela case spécifiée
+     * @param origine la case dont on veut connaître les voisins de la même couleur
+     * @return la liste des voisins de la même couleur
+     */
     public LinkedList<Case> relierComposantes(Case origine){
         LinkedList<Case> voisins = new LinkedList<Case>();
         int xOrigine = origine.getX();
@@ -175,6 +225,10 @@ public class Grille {
         return voisins;
     }
 
+    /**
+     * fonction qui sauvegarde la partie dans un fichier
+     * @throws Exception si un problème survient pendant l'écriture du fichier
+     */
     public void ecrireFichier() throws Exception {
         String entete = this.taille + "" + this.valMax;
         String valeurs = "";
