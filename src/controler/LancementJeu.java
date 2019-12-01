@@ -23,7 +23,7 @@ public class LancementJeu implements ActionListener {
     public void actionPerformed(ActionEvent actionEvent) {
         String j1name = infos.getJ1name().getText().trim();
         String j2name = infos.getJ2name().getText().trim();
-        boolean bot = infos.getBot().isSelected();
+        boolean bot = !infos.getMultiplayer().isSelected();
         String tailleGrille = infos.getTailleGrille().getText();
         String valeurCases = infos.getValeurCases().getText();
 
@@ -40,7 +40,7 @@ public class LancementJeu implements ActionListener {
             Joueur p1 = new Joueur(j1name, Color.BLUE);
             Grille grille = new Grille(Integer.parseInt(tailleGrille), Integer.parseInt(valeurCases));
             Bot p2 = new Bot(j2name, Color.RED, grille);
-            GestionJeu jeu = new GestionJeu(grille, p1, p2, true);
+            GestionJeu jeu = new GestionJeu(grille, p1, p2);
             new VueJeu(jeu);
             infos.dispose();
         } else {

@@ -19,20 +19,10 @@ public class Joueur {
         return pseudo;
     }
 
-    public void setPseudo(String _pseudo) {
-        this.pseudo = _pseudo;
-    }
-
-    public int getPoints() {
-        return adjacence.getScore();
-    }
+    public int getPoints() { return adjacence.getScore(); }
 
     public Color getCouleur() {
         return couleur;
-    }
-
-    public void setCouleur(Color _couleur) {
-        this.couleur = _couleur;
     }
 
     public int scoreGroupe(Case composante){

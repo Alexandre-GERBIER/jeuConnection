@@ -1,6 +1,7 @@
 package controler;
 
 import model.Adjacence;
+import model.Bot;
 import model.Case;
 import model.Joueur;
 import view.VueJeu;
@@ -27,6 +28,7 @@ public class CaseControlleur implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
+
         boolean valide = this.jeu.colorerCase(this.caseAssociee,jeu.getJoueurCourant());
         this.boutonAssocie.setBackground(this.caseAssociee.getCouleur());
         if(valide) {
@@ -38,6 +40,21 @@ public class CaseControlleur implements ActionListener {
             this.vue.getLabelJoueurCourant().setText("Tour de " + this.jeu.getJoueurCourant().getPseudo());
             this.vue.getLabelJoueurCourant().setForeground(this.jeu.getJoueurCourant().getCouleur());
             this.vue.getLabelNombreTours().setText(this.jeu.getTour() + " / " + this.jeu.getGrille().getTaille()*this.jeu.getGrille().getTaille());
+
+            if(this.jeu.getJoueurCourant() instanceof Bot) {
+                int[] coords = ((Bot) this.jeu.getJoueurCourant()).jouer(this.jeu.getTour());
+                Case caseAJouer = this.jeu.getGrille().get(coords[0], coords[1]);
+                boolean valideBot = this.jeu.colorerCase(caseAJouer, this.jeu.getJoueurCourant());
+                if(valideBot) {
+                    this.vue.getJbuttonGrid()[coords[0]][coords[1]].setBackground(caseAJouer.getCouleur());
+                    this.vue.setJ2points(this.jeu.getJoueurCourant().getPoints());
+                    this.jeu.nouveauTour();
+                    this.vue.getLabelJoueurCourant().setText("Tour de " + this.jeu.getJoueurCourant().getPseudo());
+                    this.vue.getLabelJoueurCourant().setForeground(this.jeu.getJoueurCourant().getCouleur());
+                    this.vue.getLabelNombreTours().setText(this.jeu.getTour() + " / " + this.jeu.getGrille().getTaille()*this.jeu.getGrille().getTaille());
+                }
+            }
+
         } else {
             Joueur possedeCase;
             if(this.caseAssociee.getCouleur().equals(Color.BLUE)) {
@@ -48,7 +65,11 @@ public class CaseControlleur implements ActionListener {
                     jButtonAssocie.setBackground(Color.BLACK);
                 }
             } else {
-                possedeCase = this.jeu.getP2();
+                if(this.jeu.isMultiplayer()) {
+                    possedeCase = this.jeu.getP2();
+                } else {
+                    possedeCase = this.jeu.getBot();
+                }
                 LinkedList<Case> composante = possedeCase.getAdjacence().getCasesComposante(this.caseAssociee);
                 for(Case c : composante) {
                     JButton jButtonAssocie = this.vue.getJbuttonGrid()[c.getX()][c.getY()];
@@ -72,5 +93,11 @@ public class CaseControlleur implements ActionListener {
                 }
             }
         }
+
+
+
+
+
+
     }
 }

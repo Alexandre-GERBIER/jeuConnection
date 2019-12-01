@@ -54,13 +54,23 @@ public class VueJeu extends JFrame {
         panelJ2.setBorder(BorderFactory.createLineBorder(Color.GRAY));
         panelJoueurs.add(panelJ2);
 
-        JLabel j2pseudo = new JLabel(this.jeu.getP2().getPseudo());
-        j2pseudo.setForeground(this.jeu.getP2().getCouleur());
+        JLabel j2pseudo;
+        if(this.jeu.isMultiplayer()) {
+            j2pseudo = new JLabel(this.jeu.getP2().getPseudo());
+            j2pseudo.setForeground(this.jeu.getP2().getCouleur());
+        } else {
+            j2pseudo = new JLabel(this.jeu.getBot().getPseudo());
+            j2pseudo.setForeground(this.jeu.getBot().getCouleur());
+        }
         j2pseudo.setFont(j2pseudo.getFont().deriveFont(20f));
         j2pseudo.setHorizontalAlignment(JLabel.CENTER);
         panelJ2.add(j2pseudo);
 
-        this.j2points = new JLabel(String.valueOf(this.jeu.getP2().getPoints()));
+        if(this.jeu.isMultiplayer()) {
+            this.j2points = new JLabel(String.valueOf(this.jeu.getP2().getPoints()));
+        } else {
+            this.j2points = new JLabel(String.valueOf(this.jeu.getBot().getPoints()));
+        }
         this.j2points.setFont(this.j2points.getFont().deriveFont(24f));
         this.j2points.setHorizontalAlignment(JLabel.CENTER);
         panelJ2.add(this.j2points);

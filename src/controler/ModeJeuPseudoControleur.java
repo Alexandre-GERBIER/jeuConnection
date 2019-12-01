@@ -15,7 +15,7 @@ public class ModeJeuPseudoControleur implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-        if(this.vue.getBot().isSelected()) {
+        if(this.vue.getMultiplayer().isSelected()) {
             this.vue.getJ2name().setEnabled(true);
             this.vue.getJ2name().setText("J2");
         } else {

@@ -136,6 +136,6 @@ public class VueChoixMode extends JFrame {
         return this.valeurCases;
     }
 
-    public JRadioButton getBot() { return this.multiplayer; }
+    public JRadioButton getMultiplayer() { return this.multiplayer; }
 
 }

@@ -9,8 +9,8 @@ public class GestionJeu {
 
     private Grille grille;
     private Joueur p1, p2, joueurCourant;
-    private int tour = 0;
     private Bot bot;
+    private int tour = 0;
 
     public GestionJeu(Grille _grille, Joueur _p1, Joueur _p2, int _tour) {
         this.grille = _grille;
@@ -24,9 +24,9 @@ public class GestionJeu {
         this(_grille, _p1, _p2, 0);
     }
 
-    public GestionJeu(Grille _grille, Joueur _p1, Bot _p2, boolean bot) {
-        this(_grille, _p1, _p2, 0);
-        this.bot = _p2;
+    public GestionJeu(Grille _grille, Joueur _p1, Bot _bot) {
+        this(_grille, _p1, null, 0);
+        this.bot = _bot;
     }
 
     public boolean colorerCase(Case caseAColorer, Joueur joueur) {
@@ -45,12 +45,14 @@ public class GestionJeu {
     }
 
     public Joueur getP1() {
-        return p1;
+        return this.p1;
     }
 
     public Joueur getP2() {
-        return p2;
+        return this.p2;
     }
+
+    public Bot getBot() { return this.bot; }
 
     public Joueur getJoueurCourant(){
         return this.joueurCourant;
@@ -58,20 +60,38 @@ public class GestionJeu {
 
     public int getTour() { return this.tour; }
 
+    public boolean isMultiplayer() {
+        return this.p2 != null;
+    }
+
     public void nouveauTour() {
         if(this.tour < (this.grille.getTaille() * this.grille.getTaille())-1) {
             if (this.joueurCourant.equals(this.p1)) {
-                this.joueurCourant = this.p2;
+                if(!this.isMultiplayer()) {
+                    this.joueurCourant = this.bot;
+                } else {
+                    this.joueurCourant = this.p2;
+                }
+
             } else {
                 this.joueurCourant = this.p1;
             }
             this.tour++;
         } else {
             String message = "Égalité";
-            if(this.p1.getPoints() > this.p2.getPoints())
-                message = this.p1.getPseudo() + " a gagné la partie";
-            else if(this.p2.getPoints() > this.p1.getPoints())
-                message = this.p2.getPseudo() + " a gagné la partie";
+            if(this.isMultiplayer()) {
+                if (this.p1.getPoints() > this.p2.getPoints()) {
+                    message = this.p1.getPseudo() + " a gagné la partie";
+                } else if (this.p2.getPoints() > this.p1.getPoints()) {
+                    message = this.p2.getPseudo() + " a gagné la partie";
+                }
+            } else {
+                if (this.p1.getPoints() > this.bot.getPoints()) {
+                    message = this.p1.getPseudo() + " a gagné la partie";
+                } else if (this.bot.getPoints() > this.p1.getPoints()) {
+                    message = this.bot.getPseudo() + " a gagné la partie";
+                }
+            }
             JOptionPane.showMessageDialog(new JFrame("Partie terminée"), message);
         }
     }
