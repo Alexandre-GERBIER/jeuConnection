@@ -79,7 +79,7 @@ public class Grille {
 
         try {
             Scanner sc = new Scanner(file);
-            String[] firstLine = sc.nextLine().split("");
+            String[] firstLine = sc.nextLine().split(" ");
             int n = Integer.parseInt(firstLine[0]);
             this.taille = n;
             int k = Integer.parseInt(firstLine[1]);
@@ -91,7 +91,7 @@ public class Grille {
             while (i<n) {
                 int j=0;
                 String ligne = sc.nextLine();
-                String[] cases = ligne.split("");
+                String[] cases = ligne.split(" ");
                 for(String courant : cases){
                     this.grille[i][j] = new Case(i, j, Integer.parseInt(courant), Color.WHITE);
                     j++;
@@ -103,7 +103,7 @@ public class Grille {
             while (i<n) {
                 int j=0;
                 String ligne = sc.nextLine();
-                String[] cases = ligne.split("");
+                String[] cases = ligne.split(" ");
                 for(String courant : cases){
                     switch(Integer.parseInt(courant)){
                         case 0:
@@ -230,7 +230,7 @@ public class Grille {
      * @throws Exception si un problème survient pendant l'écriture du fichier
      */
     public void ecrireFichier() throws Exception {
-        String entete = this.taille + "" + this.valMax;
+        String entete = this.taille + " " + this.valMax;
         String valeurs = "";
         String couleurs = "";
 
@@ -251,12 +251,11 @@ public class Grille {
                         }
                     }
                 }
-                couleurs = couleurs.concat("" + couleur);
-                valeurs = valeurs.concat("" + courante.getValeur());
+                couleurs = couleurs.concat(couleur + " ");
+                valeurs = valeurs.concat(courante.getValeur() + " ");
             }
         }
 
-        //TODO pb slash pour arborescence selon windows ou linux
         String fileContent = entete + valeurs + couleurs;
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         String[] timeStamp = dateFormat.format(new Date()).split(" ");

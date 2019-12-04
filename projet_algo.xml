@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="projet_algo" default="all">
+  
+  
+  <property file="projet_algo.properties"/>
+  <!-- Uncomment the following property if no tests compilation is needed -->
+  <!-- 
+  <property name="skip.tests" value="true"/>
+   -->
+  
+  <!-- Compiler options -->
+  
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.generate.no.warnings" value="off"/>
+  <property name="compiler.args" value=""/>
+  <property name="compiler.max.memory" value="700m"/>
+  <patternset id="ignored.files">
+    <exclude name="**/*.hprof/**"/>
+    <exclude name="**/*.pyc/**"/>
+    <exclude name="**/*.pyo/**"/>
+    <exclude name="**/*.rbc/**"/>
+    <exclude name="**/*.yarb/**"/>
+    <exclude name="**/*~/**"/>
+    <exclude name="**/.DS_Store/**"/>
+    <exclude name="**/.git/**"/>
+    <exclude name="**/.hg/**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/CVS/**"/>
+    <exclude name="**/__pycache__/**"/>
+    <exclude name="**/_svn/**"/>
+    <exclude name="**/vssver.scc/**"/>
+    <exclude name="**/vssver2.scc/**"/>
+  </patternset>
+  <patternset id="library.patterns">
+    <include name="*.war"/>
+    <include name="*.swc"/>
+    <include name="*.zip"/>
+    <include name="*.egg"/>
+    <include name="*.ane"/>
+    <include name="*.jar"/>
+    <include name="*.ear"/>
+    <include name="*.klib"/>
+  </patternset>
+  <patternset id="compiler.resources">
+    <exclude name="**/?*.java"/>
+    <exclude name="**/?*.form"/>
+    <exclude name="**/?*.class"/>
+    <exclude name="**/?*.groovy"/>
+    <exclude name="**/?*.scala"/>
+    <exclude name="**/?*.flex"/>
+    <exclude name="**/?*.kt"/>
+    <exclude name="**/?*.clj"/>
+    <exclude name="**/?*.aj"/>
+  </patternset>
+  
+  <!-- Modules -->
+  
+  
+  <!-- Module projet -->
+  
+  <dirname property="module.projet.basedir" file="${ant.file}"/>
+  
+  
+  
+  <property name="compiler.args.projet" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="projet.output.dir" value="${module.projet.basedir}/out/production/projet"/>
+  <property name="projet.testoutput.dir" value="${module.projet.basedir}/out/test/projet"/>
+  
+  <path id="projet.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="projet.module.production.classpath"/>
+  
+  <path id="projet.runtime.production.module.classpath">
+    <pathelement location="${projet.output.dir}"/>
+  </path>
+  
+  <path id="projet.module.classpath">
+    <pathelement location="${projet.output.dir}"/>
+  </path>
+  
+  <path id="projet.runtime.module.classpath">
+    <pathelement location="${projet.testoutput.dir}"/>
+    <pathelement location="${projet.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.projet">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.projet">
+    <patternset refid="excluded.from.module.projet"/>
+  </patternset>
+  
+  <path id="projet.module.sourcepath">
+    <dirset dir="${module.projet.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.projet" depends="compile.module.projet.production,compile.module.projet.tests" description="Compile module projet"/>
+  
+  <target name="compile.module.projet.production" description="Compile module projet; production classes">
+    <mkdir dir="${projet.output.dir}"/>
+    <javac destdir="${projet.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
+      <compilerarg line="${compiler.args.projet}"/>
+      <bootclasspath refid="projet.module.bootclasspath"/>
+      <classpath refid="projet.module.production.classpath"/>
+      <src refid="projet.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.projet"/>
+    </javac>
+    
+    <copy todir="${projet.output.dir}">
+      <fileset dir="${module.projet.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.projet.tests" depends="compile.module.projet.production" description="compile module projet; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.projet" description="cleanup module">
+    <delete dir="${projet.output.dir}"/>
+    <delete dir="${projet.testoutput.dir}"/>
+  </target>
+  
+  <target name="init" description="Build initialization">
+    <!-- Perform any build initialization in this target -->
+  </target>
+  
+  <target name="clean" depends="clean.module.projet" description="cleanup all"/>
+  
+  <target name="build.modules" depends="init, clean, compile.module.projet" description="build all modules"/>
+  
+  <target name="init.artifacts">
+    <property name="artifacts.temp.dir" value="${basedir}/__artifacts_temp"/>
+    <property name="artifact.output.projet:jar" value="${basedir}/out/artifacts/projet_jar"/>
+    <mkdir dir="${artifacts.temp.dir}"/>
+    <property name="temp.jar.path.projet.jar" value="${artifacts.temp.dir}/projet.jar"/>
+  </target>
+  
+  <target name="artifact.projet:jar" depends="init.artifacts, compile.module.projet" description="Build &#39;projet:jar&#39; artifact">
+    <property name="artifact.temp.output.projet:jar" value="${artifacts.temp.dir}/projet_jar"/>
+    <mkdir dir="${artifact.temp.output.projet:jar}"/>
+    <jar destfile="${temp.jar.path.projet.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${projet.output.dir}"/>
+    </jar>
+    <copy file="${temp.jar.path.projet.jar}" tofile="${artifact.temp.output.projet:jar}/projet.jar"/>
+  </target>
+  
+  <target name="build.all.artifacts" depends="artifact.projet:jar" description="Build all artifacts">
+    <mkdir dir="${artifact.output.projet:jar}"/>
+    <copy todir="${artifact.output.projet:jar}">
+      <fileset dir="${artifact.temp.output.projet:jar}"/>
+    </copy>
+    
+    <!-- Delete temporary files -->
+    <delete dir="${artifacts.temp.dir}"/>
+  </target>
+  
+  <target name="all" depends="build.modules, build.all.artifacts" description="build all"/>
+</project>

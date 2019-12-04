@@ -95,7 +95,7 @@ public class Adjacence {
         nouveauSommet.ajouterCase(caseAjout);
 
         for(int i=1; i<taille; i++){
-            Sommet courant = this.getSommetMax(sommets);
+            Sommet courant = sommets.remove(0);
             if(!courant.equals(nouveauSommet)) {
                 Case caseOldSommet = courant.getCase();
                 caseOldSommet.setParent(nouveauSommetAssocie);

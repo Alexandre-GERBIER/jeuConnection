@@ -1,5 +1,6 @@
 package controler;
 
+import model.Bot;
 import model.Grille;
 import model.Joueur;
 import view.VueChoixMode;
@@ -24,12 +25,28 @@ public class ChargerPartieControleur implements ActionListener {
         int res = fileExplorer.showOpenDialog(this.vue);
         if(res == JFileChooser.APPROVE_OPTION) {
             try {
+                Joueur j2 = null;
+                Bot b2 = null;
+                Grille grille;
+                GestionJeu jeu;
                 Joueur j1 = new Joueur(this.vue.getJ1name().getText(), Color.BLUE);
-                Joueur j2 = new Joueur(this.vue.getJ2name().getText(), Color.RED);
-                Grille grille = new Grille(fileExplorer.getSelectedFile().getAbsolutePath(), j1, j2);
-                GestionJeu jeu = new GestionJeu(grille, j1, j2, grille.getTaille()*grille.getTaille()-grille.getNbCasesBlanches());
+                if(this.vue.getMultiplayer().isSelected()) {
+                    j2 = new Joueur(this.vue.getJ2name().getText(), Color.RED);
+                } else {
+                    b2 = new Bot(this.vue.getJ2name().getText(), Color.RED);
+                }
+                if(b2 != null){
+                    grille = new Grille(fileExplorer.getSelectedFile().getAbsolutePath(), j1, b2);
+                    b2.setGrille(grille);
+                    jeu = new GestionJeu(grille, j1, b2, grille.getTaille()*grille.getTaille()-grille.getNbCasesBlanches());
+                } else {
+                    grille = new Grille(fileExplorer.getSelectedFile().getAbsolutePath(), j1, j2);
+                    jeu = new GestionJeu(grille, j1, j2, grille.getTaille()*grille.getTaille()-grille.getNbCasesBlanches());
+                }
+
                 new VueJeu(jeu);
             } catch(Exception e) {
+                System.out.println((e));
                 JOptionPane.showMessageDialog(new JFrame("Erreur"), "Le fichier choisi n'est pas au bon format");
             }
         }

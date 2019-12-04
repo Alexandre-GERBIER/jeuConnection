@@ -13,6 +13,17 @@ public class Bot extends Joueur {
     public Bot(String _pseudo, Color _couleur, Grille _grille) {
         super(_pseudo, _couleur);
         this.casesJouee = new LinkedList<Case>();
+            this.grille = _grille;
+            this.taille = this.grille.getTaille();
+            this.initGrilleJeu();
+    }
+
+    public Bot(String _pseudo, Color _couleur) {
+        super(_pseudo, _couleur);
+        this.casesJouee = new LinkedList<Case>();
+    }
+
+    public void setGrille(Grille _grille){
         this.grille = _grille;
         this.taille = this.grille.getTaille();
         this.initGrilleJeu();

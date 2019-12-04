@@ -33,7 +33,7 @@ public class LancementJeu implements ActionListener {
         } else if(tailleGrille.isEmpty() || valeurCases.isEmpty()) {
             JOptionPane.showMessageDialog(new JFrame("Erreur"), "Les valeurs paramètres doivent être renseignées");
             return;
-        } else if(!tailleGrille.matches("[0-9]+") || !valeurCases.matches("[0-9]+")) {
+        } else if(!tailleGrille.matches("[1-9]+[0-9]*") || !valeurCases.matches("[1-9]+[0-9]*")) {
             JOptionPane.showMessageDialog(new JFrame("Erreur"), "Les valeurs paramètres doivent être des entiers positifs");
             return;
         } else if(bot){
