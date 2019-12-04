@@ -20,10 +20,12 @@ public class GestionJeu {
         this.joueurCourant = this.p1;
     }
 
+    //Constructeur de GestionJeu pour JvsJ
     public GestionJeu(Grille _grille, Joueur _p1, Joueur _p2) {
         this(_grille, _p1, _p2, 0);
     }
 
+    //Constructeur de GestionJeu pour JvsIA
     public GestionJeu(Grille _grille, Joueur _p1, Bot _bot) {
         this(_grille, _p1, null, 0);
         this.bot = _bot;
@@ -64,6 +66,7 @@ public class GestionJeu {
         return this.p2 != null;
     }
 
+    //Méthode pour passer au tour suivant après qu'un joueur ait effectué une action
     public void nouveauTour() {
         if(this.tour < (this.grille.getTaille() * this.grille.getTaille())-1) {
             if (this.joueurCourant.equals(this.p1)) {
