@@ -23,20 +23,6 @@ public class Adjacence {
         }
     }
 
-
-    /**
-     * met a jour les cases appartenant aux sommet en paramètre pour les lier au sommet qui lui est associé
-     * @param origine ancien sommet
-     */
-    public void updateSommet(Sommet origine){
-        Sommet nouveauSommet = this.getSommetAssocie(origine.getCase().getParent());
-        LinkedList<Case> filsCourant = origine.getCases();
-        while (!filsCourant.isEmpty()) {
-            nouveauSommet.ajouterCase(filsCourant.pop());
-        }
-        this.sommets.remove(origine);
-    }
-
     /**
      * renvoie le score de la composante à laquelle la case appartient et si la case n'est pas réliée au sommet du groupe, mets à jour le lien de toutes les cases
      * @param composante la case d'origine
@@ -44,9 +30,6 @@ public class Adjacence {
      */
     public int afficherScore(Case composante){
         Sommet sommet = this.getSommetAssocie(composante);
-        if((!sommet.getCase().equals(composante.getParent())) && composante.getParent() != null){
-            this.updateSommet(this.getSommetAssocie(composante.getParent()));
-        }
         return sommet.getScore();
     }
 
@@ -99,7 +82,8 @@ public class Adjacence {
             if(!courant.equals(nouveauSommet)) {
                 Case caseOldSommet = courant.getCase();
                 caseOldSommet.setParent(nouveauSommetAssocie);
-                nouveauSommet.ajouterCase(caseOldSommet);
+                nouveauSommet.ajouterCases(courant.getCases());
+                nouveauSommet.updateScore(courant.getScore());
             }
         }
     }

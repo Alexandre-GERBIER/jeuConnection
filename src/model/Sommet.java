@@ -69,4 +69,9 @@ public class Sommet {
     public LinkedList<Case> getCases(){
         return this.cases;
     }
+
+    public void ajouterCases(LinkedList<Case> cases){
+        this.cases.addAll(cases);
+        this.taille += cases.size();
+    }
 }
