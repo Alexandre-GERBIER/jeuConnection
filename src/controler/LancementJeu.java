@@ -46,7 +46,7 @@ public class LancementJeu implements ActionListener {
             Joueur p1 = new Joueur(j1name, Color.BLUE);
             Grille grille = new Grille(Integer.parseInt(tailleGrille), Integer.parseInt(valeurCases));
             Bot p2 = new Bot(j2name, Color.RED, grille);
-            GestionJeu jeu = GestionJeu.jouerHumainOrdinateur(new Grille(Integer.parseInt(tailleGrille), Integer.parseInt(valeurCases)), p1, p2);
+            GestionJeu jeu = GestionJeu.jouerHumainOrdinateur(grille, p1, p2);
             new VueJeu(jeu);
             infos.dispose();
         }
