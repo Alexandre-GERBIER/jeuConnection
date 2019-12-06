@@ -1,7 +1,7 @@
 package controler;
 
 import model.Case;
-import model.Joueur;
+import model.GestionJeu;
 import view.VueJeu;
 
 import javax.swing.*;

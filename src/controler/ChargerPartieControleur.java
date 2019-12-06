@@ -1,6 +1,7 @@
 package controler;
 
 import model.Bot;
+import model.GestionJeu;
 import model.Grille;
 import model.Joueur;
 import view.VueChoixMode;

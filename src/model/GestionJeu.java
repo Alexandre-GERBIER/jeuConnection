@@ -1,6 +1,4 @@
-package controler;
-
-import model.*;
+package model;
 
 import javax.swing.*;
 import java.awt.*;
@@ -118,6 +116,14 @@ public class GestionJeu {
         Sommet sommet1 = adj.getSommetAssocie(case1);
         Sommet sommet2 = adj.getSommetAssocie(case2);
         return sommet1.equals(sommet2);
+    }
+
+    public static GestionJeu jouerDeuxHumains(Grille _grille, Joueur _p1, Joueur _p2) {
+        return new GestionJeu(_grille, _p1, _p2);
+    }
+
+    public static GestionJeu jouerHumainOrdinateur(Grille _grille, Joueur _p1, Bot _bot) {
+        return new GestionJeu(_grille, _p1, _bot);
     }
 
 }

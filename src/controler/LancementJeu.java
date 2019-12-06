@@ -1,5 +1,6 @@
 package controler;
 
+import model.GestionJeu;
 import model.Grille;
 import model.Joueur;
 import model.Bot;
@@ -45,7 +46,7 @@ public class LancementJeu implements ActionListener {
             Joueur p1 = new Joueur(j1name, Color.BLUE);
             Grille grille = new Grille(Integer.parseInt(tailleGrille), Integer.parseInt(valeurCases));
             Bot p2 = new Bot(j2name, Color.RED, grille);
-            GestionJeu jeu = new GestionJeu(grille, p1, p2);
+            GestionJeu jeu = GestionJeu.jouerHumainOrdinateur(new Grille(Integer.parseInt(tailleGrille), Integer.parseInt(valeurCases)), p1, p2);
             new VueJeu(jeu);
             infos.dispose();
         }
@@ -53,7 +54,7 @@ public class LancementJeu implements ActionListener {
         else {
             Joueur p1 = new Joueur(j1name, Color.BLUE);
             Joueur p2 = new Joueur(j2name, Color.RED);
-            GestionJeu jeu = new GestionJeu(new Grille(Integer.parseInt(tailleGrille), Integer.parseInt(valeurCases)), p1, p2);
+            GestionJeu jeu = GestionJeu.jouerDeuxHumains(new Grille(Integer.parseInt(tailleGrille), Integer.parseInt(valeurCases)), p1, p2);
             new VueJeu(jeu);
             infos.dispose();
         }

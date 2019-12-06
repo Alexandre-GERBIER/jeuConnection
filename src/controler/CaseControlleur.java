@@ -2,6 +2,7 @@ package controler;
 
 import model.Bot;
 import model.Case;
+import model.GestionJeu;
 import model.Joueur;
 import view.VueJeu;
 
