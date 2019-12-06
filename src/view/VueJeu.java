@@ -112,6 +112,7 @@ public class VueJeu extends JFrame {
                 Case caseActuelle = jeu.getGrille().get(i, j);
                 jbuttonGrid[i][j] = new JButton(String.valueOf(caseActuelle.getValeur()));
                 jbuttonGrid[i][j].addActionListener(new CaseControlleur(caseActuelle, jeu, jbuttonGrid[i][j], this));
+                jbuttonGrid[i][j].addMouseListener(new RelierComposantesControleur(caseActuelle, this, this.jeu));
                 jbuttonGrid[i][j].setBackground(caseActuelle.getCouleur());
                 panelGrilleBoutons.add(jbuttonGrid[i][j]);
             }
