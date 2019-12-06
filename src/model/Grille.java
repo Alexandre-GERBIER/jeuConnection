@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -112,11 +113,11 @@ public class Grille {
                             break;
                         case 1:
                             this.grille[i][j].setCouleur(Color.BLUE);
-                            j1.ajouterCase(this.grille[i][j], this.relierComposantes(this.grille[i][j]));
+                            j1.ajouterCase(this.grille[i][j], this.voisinsColores(this.grille[i][j]));
                             break;
                         case 2:
                             this.grille[i][j].setCouleur(Color.RED);
-                            j2.ajouterCase(this.grille[i][j], this.relierComposantes(this.grille[i][j]));
+                            j2.ajouterCase(this.grille[i][j], this.voisinsColores(this.grille[i][j]));
                             break;
                     }
                     j++;
@@ -192,7 +193,7 @@ public class Grille {
      * @param origine la case dont on veut connaître les voisins de la même couleur
      * @return la liste des voisins de la même couleur
      */
-    public LinkedList<Case> relierComposantes(Case origine){
+    public LinkedList<Case> voisinsColores(Case origine){
         LinkedList<Case> voisins = new LinkedList<Case>();
         int xOrigine = origine.getX();
         int yOrigine = origine.getY();
@@ -223,6 +224,57 @@ public class Grille {
         }
 
         return voisins;
+    }
+
+    public LinkedList<Case> voisinsColores(Case origine, Joueur j1){
+        LinkedList<Case> voisins = new LinkedList<Case>();
+        Color couleur = j1.getCouleur();
+        int xOrigine = origine.getX();
+        int yOrigine = origine.getY();
+
+        if(yOrigine-1 >= 0) {
+            Case dessus = this.grille[xOrigine][yOrigine - 1];
+            if(dessus.getCouleur() == couleur){
+                voisins.add(dessus);
+            }
+        }
+        if(yOrigine+1 < this.taille) {
+            Case dessous = this.grille[xOrigine][yOrigine + 1];
+            if(dessous.getCouleur() == couleur){
+                voisins.add(dessous);
+            }
+        }
+        if(xOrigine+1 < this.taille) {
+            Case droite = this.grille[xOrigine + 1][yOrigine];
+            if(droite.getCouleur() == couleur){
+                voisins.add(droite);
+            }
+        }
+        if(xOrigine-1 >=0 ) {
+            Case gauche = this.grille[xOrigine-1][yOrigine];
+            if(gauche.getCouleur() == couleur){
+                voisins.add(gauche);
+            }
+        }
+
+        return voisins;
+    }
+
+    public boolean relierComposantes(Case case_test, Joueur j1){
+        LinkedList<Case> voisins = this.voisinsColores(case_test, j1);
+        HashSet<Sommet> sommetVoisins = new HashSet<Sommet>();
+        boolean reponse = false;
+
+        if(voisins.isEmpty()){
+            return false;
+        }
+
+        for(Case courant : voisins){
+            sommetVoisins.add(j1.getAdjacence().getSommetAssocie(courant));
+        }
+
+
+        return sommetVoisins.size() > 1;
     }
 
     /**

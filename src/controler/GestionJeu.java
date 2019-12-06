@@ -36,7 +36,7 @@ public class GestionJeu {
             return false;
         } else {
             caseAColorer.setCouleur(joueur.getCouleur());
-            joueur.ajouterCase(caseAColorer, this.grille.relierComposantes(caseAColorer));
+            joueur.ajouterCase(caseAColorer, this.grille.voisinsColores(caseAColorer));
             return true;
         }
 
