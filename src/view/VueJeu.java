@@ -2,9 +2,11 @@ package view;
 
 import controler.*;
 import model.Case;
+import model.Joueur;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.LinkedList;
 
 public class VueJeu extends JFrame {
 
@@ -137,5 +139,21 @@ public class VueJeu extends JFrame {
     public JLabel getLabelJoueurCourant() { return this.labelJoueurCourant; }
 
     public JLabel getLabelNombreTours() { return this.labelNombreTours; }
+
+    public void afficherComposante(Case caseAssociee, Joueur possedeCase) {
+        LinkedList<Case> composante = possedeCase.getAdjacence().getCasesComposante(caseAssociee);
+        for(Case c : composante) {
+            JButton jButtonAssocie = this.getJbuttonGrid()[c.getX()][c.getY()];
+            jButtonAssocie.setBackground(Color.BLACK);
+        }
+    }
+
+    public void resetComposante(Case caseAssociee, Joueur possedeCase) {
+        LinkedList<Case> composante = possedeCase.getAdjacence().getCasesComposante(caseAssociee);
+        for(Case c : composante) {
+            JButton jButtonAssocie = this.getJbuttonGrid()[c.getX()][c.getY()];
+            jButtonAssocie.setBackground(possedeCase.getCouleur());
+        }
+    }
 
 }

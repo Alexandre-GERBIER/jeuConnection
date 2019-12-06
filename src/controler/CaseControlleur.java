@@ -1,6 +1,5 @@
 package controler;
 
-import model.Adjacence;
 import model.Bot;
 import model.Case;
 import model.Joueur;
@@ -10,7 +9,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.LinkedList;
 
 public class CaseControlleur implements ActionListener {
 
@@ -59,38 +57,17 @@ public class CaseControlleur implements ActionListener {
             Joueur possedeCase;
             if(this.caseAssociee.getCouleur().equals(Color.BLUE)) {
                 possedeCase = this.jeu.getP1();
-                LinkedList<Case> composante = possedeCase.getAdjacence().getCasesComposante(this.caseAssociee);
-                for(Case c : composante) {
-                    JButton jButtonAssocie = this.vue.getJbuttonGrid()[c.getX()][c.getY()];
-                    jButtonAssocie.setBackground(Color.BLACK);
-                }
             } else {
                 if(this.jeu.isMultiplayer()) {
                     possedeCase = this.jeu.getP2();
                 } else {
                     possedeCase = this.jeu.getBot();
                 }
-                LinkedList<Case> composante = possedeCase.getAdjacence().getCasesComposante(this.caseAssociee);
-                for(Case c : composante) {
-                    JButton jButtonAssocie = this.vue.getJbuttonGrid()[c.getX()][c.getY()];
-                    jButtonAssocie.setBackground(Color.BLACK);
-                }
             }
+            this.vue.afficherComposante(this.caseAssociee, possedeCase);
             int result = JOptionPane.showConfirmDialog(new JFrame("Score zone"), "score : " + possedeCase.scoreGroupe(this.caseAssociee));
             if(result == JOptionPane.OK_OPTION) {
-                if(possedeCase.equals(this.jeu.getP1())) {
-                    LinkedList<Case> composante = possedeCase.getAdjacence().getCasesComposante(this.caseAssociee);
-                    for(Case c : composante) {
-                        JButton jButtonAssocie = this.vue.getJbuttonGrid()[c.getX()][c.getY()];
-                        jButtonAssocie.setBackground(Color.BLUE);
-                    }
-                } else {
-                    LinkedList<Case> composante = possedeCase.getAdjacence().getCasesComposante(this.caseAssociee);
-                    for(Case c : composante) {
-                        JButton jButtonAssocie = this.vue.getJbuttonGrid()[c.getX()][c.getY()];
-                        jButtonAssocie.setBackground(Color.RED);
-                    }
-                }
+                this.vue.resetComposante(this.caseAssociee, possedeCase);
             }
         }
 
