@@ -290,10 +290,10 @@ public class Grille {
                 if(courante.getCouleur().equals(Color.WHITE)) {
                     couleur = 0;
                 } else {
-                    if(courante.getCouleur().equals(Color.RED)){
+                    if(courante.getCouleur().equals(Color.BLUE)){
                         couleur = 1;
                     } else {
-                        if(courante.getCouleur().equals(Color.BLUE)){
+                        if(courante.getCouleur().equals(Color.RED)){
                             couleur = 2;
                         }
                     }
