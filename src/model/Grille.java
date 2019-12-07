@@ -263,17 +263,12 @@ public class Grille {
     public boolean relierComposantes(Case case_test, Joueur j1){
         LinkedList<Case> voisins = this.voisinsColores(case_test, j1);
         HashSet<Sommet> sommetVoisins = new HashSet<Sommet>();
-        boolean reponse = false;
-
         if(voisins.isEmpty()){
             return false;
         }
-
         for(Case courant : voisins){
             sommetVoisins.add(j1.getAdjacence().getSommetAssocie(courant));
         }
-
-
         return sommetVoisins.size() > 1;
     }
 

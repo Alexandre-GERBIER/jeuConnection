@@ -1,6 +1,6 @@
 package view;
 
-import controler.*;
+import controller.*;
 import model.Case;
 import model.GestionJeu;
 import model.Joueur;
@@ -112,7 +112,7 @@ public class VueJeu extends JFrame {
             for(int j=0; j<tailleGrille; j++) {
                 Case caseActuelle = jeu.getGrille().get(i, j);
                 jbuttonGrid[i][j] = new JButton(String.valueOf(caseActuelle.getValeur()));
-                jbuttonGrid[i][j].addActionListener(new CaseControlleur(caseActuelle, jeu, jbuttonGrid[i][j], this));
+                jbuttonGrid[i][j].addActionListener(new CaseControleur(caseActuelle, jeu, jbuttonGrid[i][j], this));
                 jbuttonGrid[i][j].addMouseListener(new RelierComposantesControleur(caseActuelle, this, this.jeu));
                 jbuttonGrid[i][j].setBackground(caseActuelle.getCouleur());
                 panelGrilleBoutons.add(jbuttonGrid[i][j]);

@@ -114,11 +114,9 @@ public class Adjacence {
                 Sommet sommetVoisin = this.getSommetAssocie(voisin);
                 caseAjout.setParent(sommetVoisin.getCase());
                 sommetVoisin.ajouterCase(caseAjout);
-
                 break;
 
             case 2:
-
                 voisinSommet = voisinColore.getFirst();
                 sommets.add(this.getSommetAssocie(voisinSommet));
 
@@ -129,7 +127,6 @@ public class Adjacence {
                 break;
 
             case 3 :
-
                 voisinSommet = voisinColore.getFirst();
                 sommets.add(this.getSommetAssocie(voisinSommet));
 
@@ -143,7 +140,6 @@ public class Adjacence {
                 break;
 
             case 4:
-
                 voisinSommet = voisinColore.getFirst();
                 sommets.add(this.getSommetAssocie(voisinSommet));
 
@@ -157,6 +153,7 @@ public class Adjacence {
                 sommets.add(this.getSommetAssocie(autreVoisin3));
 
                 this.fusion(sommets,caseAjout,4);
+                break;
         }
 
         int max = 0;

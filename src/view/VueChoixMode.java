@@ -1,8 +1,8 @@
 package view;
 
-import controler.ChargerPartieControleur;
-import controler.LancementJeu;
-import controler.ModeJeuPseudoControleur;
+import controller.ChargerPartieControleur;
+import controller.LancementJeu;
+import controller.ModeJeuPseudoControleur;
 
 import javax.swing.*;
 import java.awt.*;

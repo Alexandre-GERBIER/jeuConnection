@@ -122,7 +122,7 @@ public class GestionJeu {
         return new GestionJeu(_grille, _p1, _p2);
     }
 
-    public static GestionJeu jouerHumainOrdinateur(Grille _grille, Joueur _p1, Bot _bot) {
+    public static GestionJeu jouerOrdiHumain(Grille _grille, Joueur _p1, Bot _bot) {
         return new GestionJeu(_grille, _p1, _bot);
     }
 
