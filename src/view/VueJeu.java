@@ -80,7 +80,7 @@ public class VueJeu extends JFrame {
         panelJ2.add(this.j2points);
 
         //Panel Options
-        JPanel panelOptions = new JPanel(new GridLayout(2, 1));
+        JPanel panelOptions = new JPanel(new GridLayout(4, 1));
         panelJoueurs.add(panelOptions);
 
         JButton menuPrincipal = new JButton("Menu principal");
@@ -90,6 +90,14 @@ public class VueJeu extends JFrame {
         JButton sauvegarderPartie = new JButton("Sauvegarder");
         sauvegarderPartie.addActionListener(new SauvegarderPartieControleur(this.jeu));
         panelOptions.add(sauvegarderPartie);
+
+        JButton existeChemin = new JButton("Existe Chemin");
+        existeChemin.addActionListener(new ExisteCheminControleur(this.jeu, this));
+        panelOptions.add(existeChemin);
+
+        JButton aide = new JButton("Aide");
+        aide.addActionListener(new AideControleur());
+        panelOptions.add(aide);
 
         //Panel infos partie
         JPanel panelJoueurCourant = new JPanel();

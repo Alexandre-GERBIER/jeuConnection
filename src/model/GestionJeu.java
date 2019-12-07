@@ -113,8 +113,13 @@ public class GestionJeu {
             return false;
         }
         Adjacence adj = this.getAdjacenceCase(case1);
+        if(adj == null)
+            return false;
         Sommet sommet1 = adj.getSommetAssocie(case1);
         Sommet sommet2 = adj.getSommetAssocie(case2);
+        if(sommet1 == null || sommet2 == null) {
+            return false;
+        }
         return sommet1.equals(sommet2);
     }
 

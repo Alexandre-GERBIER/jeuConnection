@@ -27,6 +27,7 @@ public class RelierComposantesControleur implements MouseListener {
             if(this.jeu.getGrille().relierComposantes(this.caseAssociee, this.jeu.getJoueurCourant())) {
                 msg = "Cette case relie deux composantes";
             }
+            msg += " de " + this.jeu.getJoueurCourant().getPseudo() + ".";
             JOptionPane.showMessageDialog(new JFrame("Connexion"), msg);
         }
     }
